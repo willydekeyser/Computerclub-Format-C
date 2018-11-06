@@ -4,10 +4,11 @@
 <body>
 <div th:fragment="kasboek_start">
 	<ol class="menu_lijst" id="namenlijst_click">
-		<li th:id="kasboek" th:text="kasboek"></li>
-		<li class="menu_lijst_item kasboeklijst_click" th:id="${jaartal.Id}" th:each="jaartal : ${jaartal}"><span class="menu_lijst_item kasboeklijst_click" th:text="${jaartal.jaartal}"></span>
-			<ol class="menu_lijst" id="namenlijst_click">
-				<li class="menu_lijst_item kasboeklijst_click" th:id="${rubriek.Id}" th:each="rubriek : ${jaartal.Rubriek}" th:text="'&emsp;&emsp;' + ${rubriek.rubriek}"></li>
+		<li class="menu_lijst_item kasboeklijst_click" th:id="kasboek" th:text="Kasboek" th:jaar="0" th:rubriek="0"></li>
+		<li class="menu_lijst_item kasboeklijst_click" th:id="${jaartal.Id}" th:each="jaartal : ${jaartal}" th:jaar="${jaartal.jaartal}" th:rubriek="0">
+			<span th:text="' ' + ${jaartal.jaartal}"></span>
+			<ol class="menu_lijst" th:id="'jaartal' +${jaartal.Id}" style="display: none; margin: 20px 0px;">
+				<li class="menu_lijst_item kasboeklijst_click" th:id="${rubriek.Id}" th:each="rubriek : ${jaartal.Rubriek}" th:text="${rubriek.rubriek}"></li>
 			</ol>
 		</li>
 	</ol>
@@ -23,7 +24,7 @@
 	<div class="panel-group" id="jarenlijst">
 	    <div class="panel panel-default">
 	    	<div class="panel-heading">
-	          <a class="list-group-item kasboeklijst kasboeklijst_click" th:id="kasboek" th:text="Kasboek" th:jaar="0" th:rubriek="0" ></a>
+	          <a class="list-group-item kasboeklijst kasboeklijst_click" th:id="kasboek" th:text="Kasboek" th:jaar="0" th:rubriek="0"></a>
 	      </div>
 	      </div>
 	      <div class="panel panel-default" th:each="jaartal : ${jaartal}">

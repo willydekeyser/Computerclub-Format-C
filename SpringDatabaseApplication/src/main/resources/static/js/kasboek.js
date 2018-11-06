@@ -1,4 +1,5 @@
-var kasboekId = 0;
+let kasboekId = 0;
+let selectedId = 0;
 
 async function kasboek_start() {
 	console.log('------------------------------------------------------------');
@@ -7,8 +8,8 @@ async function kasboek_start() {
 	menu_height(3);
 	
 	await Refrech_HTML('/kasboek/', '.menu_main');
-	kasboeklijst();
 	kasboeklijst_geladen();
+	kasboeklijst();
 }
 
 function newKasboek() {
@@ -51,6 +52,8 @@ kasboeklijst = function() {
 	$('.kasboeklijst_click').on('click', function() {
 		$('ol li.active').removeClass('active');
 		$(this).addClass('active');
+		document.getElementById("jaartal" + this.id).style.display = "block";
+		
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
 		$.ajax({
@@ -64,7 +67,7 @@ kasboeklijst = function() {
 };
 
 function kasboeklijst_geladen() {
-	$('#kasboek').addClass('active');
+	$('#namenlijst_click #kasboek').addClass('active');
 	$.ajax({
 		url: "../kasboek/kasboekJaarRubriek?jaar=0&rubriek=0",
 		success: function(data) {
