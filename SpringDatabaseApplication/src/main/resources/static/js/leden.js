@@ -21,7 +21,6 @@ async function leden_start() {
 	menu_height(3);
 	selectedSoortId = 1;
 	selectedLidId = 0;
- 	await Refrech_HTML('/leden/leden', '.menu_test');
 	await Promise.all([
 		Refrech_HTML('/leden/leden_menu/1', '.menu_header'),
 		Refrech_HTML('/leden/namenlijst/1/0', '.menu_main')

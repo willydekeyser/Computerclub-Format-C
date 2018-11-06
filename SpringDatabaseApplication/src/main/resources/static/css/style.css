@@ -31,6 +31,10 @@ body{
 	box-sizing: border-box;
 }
 
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
 /* ---------------- START MAIN GRID ---------------- */
 
 .grid_container{
@@ -259,6 +263,25 @@ body{
 	
 }
 
+.form-alert {
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 1rem;
+	border: 1px solid transparant;
+	border-radius: 0.25rem;
+}
+
+.form-error {
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+}
+
+.form-info {
+	color: #0c5460;
+	background-color: #d1ecf1;
+	border-color: #bee5eb;
+}
+
 .knop:not(:disabled):not(.disaled) {
 	cursor: pointer;
 }
@@ -268,9 +291,9 @@ body{
 }
 
 .knop-groen {
-	color: #fff;
-	background-color: groen;
-	border-color: groen;
+	color: #000;
+	background-color: green;
+	border-color: green;
 }
 
 /* ---------------- END LOGIN ---------------- */

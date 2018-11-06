@@ -47,7 +47,7 @@ public class KasboekController {
 		model.addAttribute(JAARTAL, jaartal);
 		model.addAttribute(KASBOEK, kasboekLijst);
 		model.addAttribute(AANTAL, kasboekLijst.size());
-		return "kasboek/index";
+		return "kasboek/index :: kasboek_start";
 	}
 	
 	@GetMapping("/kasboek")

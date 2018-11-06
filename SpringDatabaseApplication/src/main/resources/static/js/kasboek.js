@@ -1,5 +1,16 @@
 var kasboekId = 0;
 
+async function kasboek_start() {
+	console.log('------------------------------------------------------------');
+	console.log('Menu kasboek onclick');
+	reset_grid();
+	menu_height(3);
+	
+	await Refrech_HTML('/kasboek/', '.menu_main');
+	kasboeklijst();
+	kasboeklijst_geladen();
+}
+
 function newKasboek() {
 	$.ajax({
 		url: "/kasboek/newKasboek",
@@ -38,16 +49,17 @@ function kasboekSelect(id) {
 
 kasboeklijst = function() {
 	$('.kasboeklijst_click').on('click', function() {
-		$('a.active').removeClass('active');
+		$('ol li.active').removeClass('active');
 		$(this).addClass('active');
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
 		$.ajax({
 			url: "../kasboek/kasboekJaarRubriek?jaar=" + selectedJaar + "&rubriek=" + selectedRubriek,
 			success: function(data) {
-				$("#lijst").html(data);
+				$(".main_section_A").html(data);
 			}	
 		});
+		
 	});
 };
 
@@ -56,7 +68,7 @@ function kasboeklijst_geladen() {
 	$.ajax({
 		url: "../kasboek/kasboekJaarRubriek?jaar=0&rubriek=0",
 		success: function(data) {
-			$("#lijst").html(data);
+			$(".main_section_A").html(data);
 		}	
 	});
 	$(document).contextmenu(function(event){

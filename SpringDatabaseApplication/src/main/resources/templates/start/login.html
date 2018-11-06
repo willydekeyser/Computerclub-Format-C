@@ -4,8 +4,8 @@
 <body>
 <div th:fragment="login" class="login_container">
     <h1>Login</h1>
-	<div th:if="${param.error}" class="alert alert-danger">Invalid username and password.</div>
-	<div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
+	<div th:if="${param.error}" class="form-alert form-error">Invalid username and password.</div>
+	<div th:if="${param.logout}" class="form-alert form-info">You have been logged out.</div>
 	<form th:action="@{login}" method="post">
 		<div class="login_form_groep">
 			<label for="username"><span class=""></span>Username:</label>

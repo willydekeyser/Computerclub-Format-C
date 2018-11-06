@@ -4,7 +4,7 @@
 
 function start_main() {
 	console.log("Start main");
-	initSessionMonitor();
+	//initSessionMonitor();
 	$('#div_script').empty();
 	$(document).on('contextmenu', (event) => {
 		console.log("Context menu is uitgeschakeld");
@@ -63,7 +63,7 @@ function start_menu() {
 		return false;
 	});
 	$('#header #kasboek').on('click', () => {
-		max_lidgeld_start()
+		kasboek_start()
 		.then(() => {
 			console.log('Kasboek geladen');
 		})
