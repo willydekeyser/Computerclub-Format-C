@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<p></p>
+	<h2>Rubriek</h2>
+	<p th:text="'Id: ' + ${rubriek.Id}"></p>
+	<p th:text="'Rubriek: ' + ${rubriek.Rubriek}"></p>
+
+	<table class="test">
+		<tr class="kop">
+			<th class="kop">Id</th>
+			<th class="kop">Jaar</th>
+			<th class="kop">Omschrijving</th>
+			<th class="kop">Datum</th>
+			<th class="kop">Uitgaven</th>
+			<th class="kop">Inkomsten</th>
+		</tr>
+		<tr class="test" th:each="kasboek : ${rubriek.kasboeken}">
+			<td class="test" th:text="${kasboek.id}"></td>
+			<td class="test" th:text="${kasboek.jaartal}"></td>
+			<td class="test" th:text="${kasboek.omschrijving}"></td>
+			<td class="test right" th:text="${#temporals.format(kasboek.datum, 'dd-MM-yyyy')}"></td>
+			<td class="test right" th:text="'€' + ${#numbers.formatDecimal(kasboek.uitgaven, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+			<td class="test right" th:text="'€' + ${#numbers.formatDecimal(kasboek.inkomsten, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+		</tr>
+	</table>
+	<script>	
+	$(document).ready(function() {
+		$(document).contextmenu(function(event) {
+			event.preventDefault();
+		});
+	});
+</script>
+</body>
+</html>

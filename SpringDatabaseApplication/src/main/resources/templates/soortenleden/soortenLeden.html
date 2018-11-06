@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div th:fragment="soortenleden_tabel_start">
+<div class="container-fluid">
+    <p>Soorten leden lijst: <span id="aantal_soortenleden" th:text="${aantal}"></span></p>
+	<div class="btn-group btn-group-sm">
+		<button type="button" class="btn btn-success" th:onclick="newSoortenleden();" >&nbsp;&nbsp;&nbsp;&nbsp;Nieuw&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		<button type="button" class="btn btn-success" th:onclick="updateSoortenleden();" >&nbsp;Aanpassen&nbsp;</button>
+		<button type="button" class="btn btn-danger" th:onclick="deleteSoortenleden();" >Verwijderen</button>
+	</div>
+	<table class="test" style="width:50%;">
+	<thead>
+		<tr class="kop">
+			<th class="kop">Id</th>
+			<th class="kop">Soorten leden</th>
+		</tr>
+	</thead>
+	<tbody id="soortenleden_tabel_body">
+		<tr class="test" onclick="soortenledenSelect(this)" th:each="soortenleden : ${soortenleden}" th:id="${soortenleden.id}" th:soortenleden="${soortenleden.Soortenleden}">
+			<td style="width: 50px" class="test" th:text="${soortenleden.id}"></td>
+			<td class="test" th:text="${soortenleden.Soortenleden}"></td>
+		</tr>
+	</tbody>
+	</table>
+</div>
+
+<div id="editSoortenledenModalHolder"></div>
+
+</div>
+  
+</body>
+</html>

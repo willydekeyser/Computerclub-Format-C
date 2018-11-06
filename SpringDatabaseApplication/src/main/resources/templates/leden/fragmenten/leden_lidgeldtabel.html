@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+	<div th:fragment="leden_lidgeldtabel" id="leden_lidgeldtabel">
+		<table class="lidgeld">
+			<thead>
+				<tr class="kop">
+					<th class="kop right">Id</th>
+					<th class="kop right">Datum</th>
+					<th class="kop right">Bedrag</th>
+				</tr>
+			</thead>
+			<tbody id="lidgeld_tabel_body">
+			
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

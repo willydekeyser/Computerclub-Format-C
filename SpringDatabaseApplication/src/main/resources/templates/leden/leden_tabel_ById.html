@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div th:fragment="leden_tabel_byid" class="leden_tabel">
+	<div class="leden_tabel_gegevens">
+	<h2 th:text="'Lid: ' + ${leden.id}">Lid:</h2>
+    <p th:text="'Naam: ' + ${leden.voornaam + ' ' + leden.familienaam}"></p>
+    <p th:text="'Adres: ' + ${leden.straat + ' ' + leden.nr}"></p>
+    <p th:text="'Gemeente: ' + ${leden.postnr + ' ' + leden.gemeente}"></p>
+    <p th:text="'Telefoon nummer: ' + ${leden.telefoonnummer}"></p>
+    <p th:text="'GSM nummer: ' + ${leden.gsmnummer}"></p>
+    <p th:text="'E-mail: ' + ${leden.emailadres}"></p>
+    <p th:text="'Website: ' + ${leden.webadres}"></p>
+    <p th:text="'Datum inschrijving: ' + ${#temporals.format(leden.datumlidgeld, 'dd-MM-yyyy')}"></p>
+    <p th:text="'Soort lid: ' + ${leden.soortenleden.soortenleden}"></p>
+    <p>Ontvang mail: <input type="checkbox" onclick="return false;" th:checked="${leden.ontvangMail}"/></p>
+    <p>Mail vlag: <input type="checkbox" onclick="return false;" th:checked="${leden.mailVlag}"/></p>
+  	</div>
+  	<div class="leden_tabel_lidgeld">
+  	<h2>Lidgeld:</h2>
+  	<table class="lidgeld">
+		<tr class="kop">
+			<th class="kop">Id</th>
+			<th class="kop">Datum</th>
+			<th class="kop">Bedrag</th>
+		</tr>
+		<tr class="test" th:each="lidgeld : ${leden.lidgelden}">
+			<td class="lidgeld" onclick="myFunction(this)" th:text="${lidgeld.Id}"></td>
+			<td class="lidgeld right" onclick="myFunction(this)" th:text="${#temporals.format(lidgeld.datum, 'dd-MM-yyyy')}"></td>
+			<td class="lidgeld right" onclick="myFunction(this)" th:text="'€' + ${#numbers.formatDecimal(lidgeld.bedrag, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+		</tr>
+	</table>
+	</div>
+</div>
+</body>
+</html>

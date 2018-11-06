@@ -1,0 +1,304 @@
+@charset "ISO-8859-1";
+html{
+	background-color:	#FFFFFF; 
+	margin:		0px; 
+	padding:	0px; 
+	font-size:	12px;
+	  
+}
+
+@media screen and (min-width: 600px) {
+	html {
+		font-size: 12px;
+	}
+}
+
+ @media screen and (min-width: 800px) {
+    html {
+		font-size: 12px;
+	}
+}
+	
+body{
+	font-family: "Segoe UI", sans-serif ;
+	background:	#FFFFFF; 
+	margin:		0px; 
+	padding:	0px;
+	line-height: 1.5;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* ---------------- START MAIN GRID ---------------- */
+
+.grid_container{
+	display:	grid;
+	height:		100vh;
+	width:		100vw;
+	grid-template-columns:	300px auto;
+	grid-template-rows: 	3rem auto 3rem;
+	grid-template-areas:	"header header"
+							"menu main"
+							"footer footer";
+}
+
+.header {
+	grid-area: header;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	
+	background-color: #eee;
+	padding: 0 10px;
+	
+}
+
+.menu {
+	grid-area: menu;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+	background-color: #fff;
+	margin: 0px;
+	
+	overflow: hidden;
+}
+
+.main {
+	grid-area: main;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+	background-color: #fff;
+	
+	overflow: auto;
+}
+
+.footer {
+	grid-area: footer;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: #eee;
+	margin: 0 5px;
+}
+
+.header_logo {
+}
+
+.header_menu {
+	flex-grow: 1;
+}
+
+.menu_header {
+	border: 1px solid black;
+	flex: 0 0 0rem;
+	/*min-height: 3rem;*/
+	padding: 5px;
+}
+
+.menu_main {
+	border: 1px solid black;
+	flex: 1 1 auto;
+	/*flex-grow: 1;*/
+	overflow: auto;
+}
+
+.main_section_A {
+	border: 1px solid black;
+	flex: 1 1 40%;
+	padding: 10px;
+	overflow: auto;
+}
+
+.main_section_B {
+	border: 1px solid black;
+	padding: 10px;
+	flex: 1 1 60%;
+	overflow: auto;
+}
+
+.footer_section_A {
+	border: 0.2px solid #ccc;
+	flex: 1 1 15%;
+}
+
+.footer_section_B {
+	border: 0.2px solid #ccc;
+	flex: 1 1 85%;
+}
+
+.website_laden {
+	margin: 0;
+	padding: 100px 0px 0px 300px;
+	font-size: 40px;
+	color: green;
+}
+/* ---------------- END MAIN GRID ---------------- */
+
+/* ------------------------------------------------------------------------------- */
+
+/* ---------------- START HEADER ---------------- */
+
+.navigation {
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navigation_list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.navigation_item {
+	margin: 0 10px;
+	font-size: 14px;
+	font-weight: bold;	
+}
+
+.navigation_link, .navigation_link:link, .navigation_link:visited, .navigation_link:active{
+	text-decoration: none;
+	padding: 2px 10px;
+	color: green;
+}
+
+.navigation_link:hover {
+	text-decoration: none;
+	background-color: #bbb;
+	padding: 2px 10px;
+	color: red;
+}
+
+.navigation_link {
+	
+}
+
+.navigation_logo {
+	padding: 0px 10px;
+	margin: 0;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+/* ---------------- END HEADER ---------------- */
+
+/* ------------------------------------------------------------------------------- */
+
+/* ---------------- START MENU ---------------- */
+
+.menu_select_soortleden {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: center;
+}
+
+.menu_select_soortleden label {
+	padding: 2px 15px;
+	margin: 0;
+	background-color: #ccc;
+}
+
+.menu_select_soortleden select {
+	flex-grow: 0.8;
+	padding: 2px 5px;
+}
+
+/* ---------------- END MENU ---------------- */
+
+/* ------------------------------------------------------------------------------- */
+
+/* ---------------- START MAIN ---------------- */
+
+/* ---------------- END MAIN ---------------- */
+
+/* ------------------------------------------------------------------------------- */
+
+/* ---------------- START FOOTER ---------------- */
+
+/* ---------------- END FOOTER ---------------- */
+
+
+
+.leden_tabel {
+	display: flex;
+}
+
+.leden_tabel_gegevens {
+	flex: 1 1 50%;
+}
+
+.leden_tabel_lidgeld {
+	flex: 1 1 50%;
+}
+
+.menu_lijst {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	padding-left: 0px;
+}
+
+.menu_lijst_item {
+	padding: .75rem 1.25rem;
+	border-color: #fff;
+	border: 1px solid rgba(0,0,0,0.125);
+	margin-bottom: -1px;
+}
+
+.menu_lijst_item:hover {
+	cursor: pointer;
+	font-weight: bold;
+	color: #FF0000;
+}
+
+.menu_lijst_item.active {
+	z-index: 2;
+	color: #fff;
+	background-color: green;
+	border-bottom-color: green
+}
+
+
+
+h1 {color: blue}
+p {color: #000000}
+tr.kop {color: #0000FF}
+th.kop:hover {color: #0000FF}
+tr.kop:first-child {background: #FFFF00}
+table.test {width: 100%}
+table.lidgeld {width: 85%}
+
+tr.test:nth-child(even) {background: #DDDDDD}
+tr.test:nth-child(odd) {background: #FFFFFF}
+tr.test:hover {cursor: pointer; background: #000000; color: #FFFFFF}
+
+li.namenlijst:hover{ cursor: pointer; font-weight: bold; color: #FF0000; }
+span.namenlijst:hover{ cursor: pointer; font-weight: bold; color: #FF0000; }
+a.kasboeklijst:hover{ cursor: pointer; font-weight: bold; color: #FF0000; }
+a.kasboeklijst{ color: #000000; }
+td.lidgeld:hover{ cursor: auto; }
+
+tr.active {background: #000000; color: #FF0000; font-weight: bold;}
+
+
+.center { text-align: center; }
+.left { text-align: left; }
+.right { text-align: right;	}
+
+

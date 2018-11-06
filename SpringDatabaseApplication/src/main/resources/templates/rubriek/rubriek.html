@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div th:fragment="rubriek_tabel_start">
+<div class="container-fluid">
+    <p>Rubrieken lijst: <span id="aantal_rubrieken" th:text="${aantal}"></span></p>
+	<div class="btn-group btn-group-sm">
+		<button type="button" class="btn btn-success" th:onclick="newRubriek();" >&nbsp;&nbsp;&nbsp;&nbsp;Nieuw&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		<button type="button" class="btn btn-success" th:onclick="updateRubriek();" >&nbsp;Aanpassen&nbsp;</button>
+		<button type="button" class="btn btn-danger" th:onclick="deleteRubriek();" >Verwijderen</button>
+	</div>
+	<table class="test" style="width:50%;">
+	<thead>
+		<tr class="kop">
+			<th class="kop">Id</th>
+			<th class="kop">Rubriek</th>
+		</tr>
+	</thead>
+	<tbody id="rubriek_tabel_body">
+		<tr class="test" th:onclick="rubriekSelect(this)" th:each="rubriek : ${rubriek}"  th:id="${rubriek.id}" th:rubriek="${rubriek.rubriek}">
+			<td style="width: 50px" class="test" id="rubriek_id" th:text="${rubriek.id}"></td>
+			<td class="test" id="rubriek_rubriek" th:text="${rubriek.rubriek}"></td>
+		</tr>
+	</tbody>
+	</table>
+</div>
+	<div id="editRubriekModalHolder"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="header-css">
+	<!-- this is header-css -->
+	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"></link>
+    <!--   <link rel="stylesheet" href="https://getbootstrap.com/docs/4.1/assets/css/docs.min.css"></link> -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"></link>
+    <link th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" rel="stylesheet" type="text/css" th:href="@{/css/contextmenu.css}"></link>
+    
+    <!-- this is header-js -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	
+	
+	<script type="text/javascript" th:src="@{/js/start.js}"></script>
+	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/leden.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/lidgeld.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/kasboek.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/rubriek.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/soortenLeden.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/agenda.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/restcontroller.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/contextmenu.js}"></script>
+    
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta name="description" content="Computerclub Format C"></meta>
+    <meta name="author" content="Willy De Keyser"></meta>
+    
+    <title th:text="${title}">Computerclub Format C</title>
+</head>
+<body>
+<div  th:fragment="header_logo" class="navigation_logo">
+    <!-- this is header LOGO -->
+    <a class="navigation_link" href="/">Computerclub Format C</a>
+</div>
+
+	<!-- this is header MENU -->
+<ul th:fragment="header_menu" id="header" class="navigation_list">
+	<li class="navigation_item">
+		<a class="navigation_link" th:href="@{/}">Home</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+		<a id="leden" class="navigation_link" href="/">Leden</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a id="leden_tabel" class="navigation_link" href="/">Leden tabel</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+		<a id="lidgeld" class="navigation_link" href="/">Lidgeld</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a id="lidgeld_tabel" class="navigation_link" href="/">Lidgeld tabel</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+		<a id="kasboek" class="navigation_link" href="/}">Kasboek</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a id="kasboek_tabel" class="navigation_link" href="/">Kasboek tabel</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a id="soortenleden_tabel" class="navigation_link" href="/">Soorten leden</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a id="rubriek_tabel" class="navigation_link" href="/">Rubriek</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a id="agenda" class="navigation_link" href="/">Agenda</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a id="restcontroller" class="navigation_link" href="/">Rest Controller</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('!isAuthenticated()')}"><a
+		class="navigation_link" onclick="return start_login()" href="/">Login</a>
+	</li>
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+		<a class="navigation_link" onclick="return start_logout()" href="/">Log out</a>
+	</li>
+</ul>
+
+
+</body>
+</html>

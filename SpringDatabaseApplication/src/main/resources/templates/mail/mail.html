@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+<p th:text="${message} + 'TEST'">Test</p>
+<div id="result"></div>
+
+<script>
+	$(document).ready(function(){
+		interval = setInterval(test, 1000);		
+	});
+
+
+	function test() {
+		
+		$.ajax({
+	           url : 'test',
+	           success : function(data) {
+	               $('#result').html(data);
+	               if ($('#mailProgress').attr('teller') == 100) {
+	            	   clearInterval(interval);
+	               }
+	       		}
+		});
+	}
+
+</script>
+
+</body>
+</html>

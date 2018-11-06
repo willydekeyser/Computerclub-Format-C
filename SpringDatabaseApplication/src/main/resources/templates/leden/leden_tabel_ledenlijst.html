@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+	<div th:fragment="leden_tabel_ledenlijst">
+    <p th:text="'Aantal: ' + ${aantal}" />
+	<table class="test">
+		<tr class="kop">
+			<th class="kop">Id</th>
+			<th class="kop">Naam</th>
+			<th class="kop">Adres</th>
+			<th class="kop">Inschrijving</th>
+			<th class="kop">Soort</th>
+		</tr>
+		<tr class="test" th:each="leden : ${leden}">
+			<td id="leden_tabel_ledenlijst" th:id="${leden.id}" class="test" th:onclick="'ledenbyid(' + ${leden.Id} +')'" th:text="${leden.id}"></td>
+			<td class="test" th:onclick="'ledenbyid(' + ${leden.Id} +')'" th:text="${leden.voornaam} + ' ' + ${leden.familienaam}"></td>
+			<td class="test" th:onclick="'ledenbyid(' + ${leden.Id} +')'" th:text="${leden.straat} + ' ' + ${leden.nr} + ' - ' + ${leden.postnr} + ' ' + ${leden.gemeente}"></td>
+			<td class="test right" th:onclick="'ledenbyid(' + ${leden.Id} +')'" th:text="${#temporals.format(leden.datumlidgeld, 'dd-MM-yyyy')}"></td>
+			<td class="test" th:onclick="'ledenbyid(' + ${leden.Id} +')'" th:text="${leden.soortenleden.soortenleden}"></td>
+		</tr>
+	</table>
+</div> 
+</body>
+</html>

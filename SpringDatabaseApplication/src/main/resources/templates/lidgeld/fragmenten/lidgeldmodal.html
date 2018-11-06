@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org/">
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+<div th:fragment="editLidgeldModal">
+	<div class="editlidgeldForm">
+		<Form th:action="@{/leden/save_editLidgeld}" method="post" th:object="${Lidgeld}" id="editLidgeldModalForm">
+			<div class="modal fade" id="editLidgeldModal" role="dialog">
+				<div class="modal-dialog modal-lg" >
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-titel"></h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-1">Lid:</label>
+								<input type="text" class="col-sm-3" id="naam" name="naam" readonly />
+								<input name="leden.id" id="naam_id" type="hidden" value="0"/>
+								<label class="col-1">Id:</label>
+								<input type="text" class="col-sm-1" id="id" name="id" value="0" readonly />
+							</div>
+							<div class="form-group">
+								<label class="col-1">Datum:</label> 
+								<input type="date" class="col-sm-2" id="datum" name="datum" value="" placeholder="Datum" required />
+								<label class="col-1">Bedrag:</label>
+								<input type="number" class="col-sm-2 currency" step="0.01" id="bedrag" name="bedrag" value="30,00" placeholder="Bedrag" required />
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" id="editLidgeld_save" class="modal-knop btn btn-primary" th:disabled="true">New</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</Form>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org/">
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+
+<div th:fragment="editSoortenledenModal">
+	<div class="editSoortenledenForm">
+		<Form method="post" th:object="${Soortenleden}" id="editSoortenledenModalForm">
+			<div class="modal fade" id="editSoortenledenModal" role="dialog">
+				<div class="modal-dialog modal-lg" >
+					<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title"  id="modal-titel"></h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div id="form_body" class="modal-body">
+						<div class="form-group">
+							<label class="col-2">Id:</label>
+							<input type="text" class="col-sm-1"  id="id" name="id" value="" readonly />
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2">Soort:</label>
+							<input type="text" class="col-sm-4" id="soortenleden" name="soortenleden" title="Soort invullen!" placeholder="Soort" required />
+			
+						</div>
+					</div>
+					<div id="form_body_error" class="modal-body">
+							<p>Je kan <span id="form_body_error_naam">Naam!</span> niet verwijderen.</p>
+							<p>Eerst moeten alle leden records worden verwjdert.</p>
+						</div>
+					<div class="modal-footer">
+						<button type="submit" id="editSoortenleden_save" class="btn btn-primary">Save soort</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</Form>
+</div>
+</div>
+
+</body>
+</html>

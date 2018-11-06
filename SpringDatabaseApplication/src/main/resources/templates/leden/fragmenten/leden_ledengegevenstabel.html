@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:fragment="leden_ledengegevenstabel" id="leden_ledengegevenstabel">
+	<table class="table">
+		<tr>
+			<td class="col-md-2">Id:</td>
+			<td id="id" class="col-md-2"></td>
+			<td class="col-md-2">Telefoon nummer:</td>
+			<td id="telefoon" class="col-md-2"></td>
+			<td class="col-md-2">Datum inschrijving:</td>
+			<td id="inschrijving" class="col-md-2"></td>
+		</tr>
+		<tr>
+			<td class="col-md-2">Naam:</td>
+			<td id="naam" class="col-md-2"></td>
+			<td class="col-md-2">GSM nummer:</td>
+			<td id="gsm" class="col-md-2"></td>
+			<td class="col-md-2">Soort lid:</td>
+			<td id="soort" class="col-md-2"></td>
+		</tr>
+		<tr>
+			<td class="col-md-2">Adres:</td>
+			<td id="adres" class="col-md-2"></td>
+			<td class="col-md-2">E-mail adres:</td>
+			<td id="email" class="col-md-2"></td>
+			<td class="col-md-2">Ontvang mail:</td>
+			<td class="col-md-2"><input id="ontvangmail" type="checkbox" onclick="return false;" th:checked="false"/></td>
+		</tr>
+		<tr>
+			<td class="col-md-2">Gemeente:</td>
+			<td id="gemeente" class="col-md-2"></td>
+			<td class="col-md-2">Website:</td>
+			<td id="website" class="col-md-2"></td>
+			<td class="col-md-2">Mail vlag:</td>
+			<td class="col-md-2"><input id="mailvlag" type="checkbox" onclick="return false;" th:checked="false"/></td>
+		</tr>
+	</table>
+</div>	
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div class="grid_container">
+	<header class="header">
+		<div class="header_logo"></div>
+		<div class="header_menu"></div>
+	</header>
+	<div class="menu">
+		<div class="menu_header"></div>
+		<div class="menu_main"></div>
+	</div>
+	<div class="main">
+		<div class="main_section_A"><p class="website_laden">WEBSITE LOADING......</p></div>
+		<div class="main_section_B"></div>
+	</div>
+	<footer class="footer">
+		<div class="footer_section_A">Footer Section A</div>
+		<div class="footer_section_B">Footer Section B</div>
+	</footer>
+</div>
+<div id="div_script">
+	<script>
+		$(document).ready(start_main());
+	</script>
+</div>
+</body>
+</html>

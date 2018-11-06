@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org/">
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+
+<div th:fragment="editLidModal">
+	<div class="editLidForm">
+		<Form method="post" th:object="${Leden}" id="editLidModalForm">
+			<div class="modal fade" id="editLidModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal-titel"></h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-2">Id:</label> 
+								<input type="text" class="col-sm-1" th:value=0 id="id" name="id" value="" readonly />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">Naam:</label> 
+								<input type="text" class="col-sm-4" id="voornaam" name="voornaam" title="Voornaam invullen!" placeholder="Voornaam" required />
+								<input type="text" class="col-sm-5" id="familienaam" name="familienaam" title="Familienaam invullen!" placeholder="Familienaam" required />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">Adres:</label>
+								<input type="text" class="col-sm-7" id="straat" name="straat" placeholder="Straat" />
+								<input type="text" class="col-sm-2" id="nr" name="nr" placeholder="Nr" />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">Gemeente:</label>
+								<input type="text" class="col-sm-2" id="postnr" name="postnr" placeholder="Postnummer" />
+								<input type="text" class="col-sm-7" id="gemeente" name="gemeente" placeholder="Gemeente" />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">Telefoon:</label>
+								<input type="text" class="col-sm-4" id="telefoonnummer" name="telefoonnummer" placeholder="Telefoon nummer" />
+								<input type="text" class="col-sm-5" id="gsmnummer" name="gsmnummer" placeholder="Gsm Nummer" />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">E-mail:</label>
+								<input type="email" class="col-sm-9" id="emailadres" name="emailadres" placeholder="E-mail" />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">Website:</label>
+								<input type="url" class="col-sm-9" id="webadres" name="webadres" placeholder="Website" />
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2">Inschrijving:</label>
+								<input type="date" class="col-sm-3" id="datumlidgeld" name="datumlidgeld" title="Datum invullen!" placeholder="Datum inschrijving" required />
+								<label class="col-sm-2">Soort lid:</label>
+								<select name="soortenleden.id" id="soortlid" class="col-sm-4" title="Maak een selectie!" required>
+									<option value="" disabled selected>Select soort lid!</option>
+									<option th:selected="false" th:each="soort : ${ledensoorten}" th:value="${soort.id}" th:text="${soort.soortenleden}"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3">Ontvang e-mail:</label>
+								<input type="checkbox" class="col-sm-1" id="ontvangmail" th:checked="false" name="ontvangMail" />
+								<label class="col-sm-3">E-mail vlag:</label>
+								<input type="checkbox" class="col-sm-1" id="mailvlag" th:checked="false" name="mailVlag" />
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">Save lid</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</Form>
+	</div>
+</div>
+
+<div th:fragment="deleteLidModal">
+	<div class="verwijderenlidForm">
+		<Form th:action="@{/leden/save_deleteLid}" method="post" th:object="${Leden}" id="deleteLidModalForm">
+			<div class="modal fade" id="deleteLidModal" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title text-danger" id="delete-modal-titel"></h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div id="delete_form_body" class="modal-body">
+							<p>Lid verwijderen.</p>
+							<div class="form-group">
+								<input type="text" class="col-sm-2" id="delete_id" name="id" readonly />
+								<input type="text" class="col-sm-6" id="delete_naam" name="voornaam" readonly />
+							</div>
+						</div>
+						<div id="delete_form_body_error" class="modal-body">
+							<p>Je kan <span id="delete_form_body_error_naam">Naam!</span> niet verwijderen.</p>
+							<p>Eerst moeten alle lidgeld records worden verwjdert.</p>
+						</div>
+						<div id="delete_modal_footer" class="modal-footer">
+							<button type="submit" class="btn btn-danger">Delete lid</button>
+							<button id="sluiten" type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+						</div>
+						<div id="delete_modal_footer_error" class="modal-footer">
+							<button id="sluiten" type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</Form>
+	</div>
+</div>
+	
+</body>
+</html>

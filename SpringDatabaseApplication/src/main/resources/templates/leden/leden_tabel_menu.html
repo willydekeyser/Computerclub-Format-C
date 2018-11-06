@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+	<div th:fragment="leden_tabel_menu">
+		<div class="input-group col-5">
+			<div class="input-group-prepend">
+				<label class="input-group-text" for="select_leden">Select: </label>
+			</div>
+			<select class="form-control" id="select_leden">
+				<option th:each="soort : ${soorten}" th:id="${soort.id}"
+					th:value="${soort.id}" th:text="${soort.soortenleden}"
+					th:selected="${soort.actief}"></option>
+			</select>
+		</div>
+		<div id="leden_tabel_ledenlijst"></div>
+
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+			var soortId = /*[[${soortId}]]*/ '1';
+			$(document).ready(leden_tabel_menu_geladen(soortId));
+		/*]]>*/
+		</script>
+
+	</div>
+</body>
+</html>

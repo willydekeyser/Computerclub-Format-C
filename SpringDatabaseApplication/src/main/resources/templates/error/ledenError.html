@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+	<h1>Fout bij het ingeven van de leden gegevens!</h1>
+	<ol id="">
+		<li class="" th:each="error : ${errors}" th:text="${error}"></li>
+	</ol>
+	<a class="nav-link" th:href="@{/}">Terug</a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+
+<div th:fragment="start_main">
+	<div class="">	
+		<p th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:text="${'Gebruikers naam: ' + user + ' - ' + roles}"></p>
+	</div>
+	
+	<div class="">
+		<div style="margin-top: 150px; margin-left: 250px; font-size: 20px;">
+			<img th:src="@{'image/logo.gif'}" alt="http://www.cformatc.be" style="display: block;" />
+			<h1 style="color: green;">Computerclub Format C</h1>
+			<p>Kring Kristus Koning<br />
+			Rerum Novarumplein 25<br />
+			9000 Gent<br />
+			Elke woensdag van 20u00 tot 22u30<br />
+			<a href="http://www.cformatc.be" target="_blank">http://www.cformatc.be</a><br />
+			Voor meer info mail: <a href="mailto:contact@cformatc.be?Subject=Info" target="_top">contact@cformatc.be</a>
+			</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>

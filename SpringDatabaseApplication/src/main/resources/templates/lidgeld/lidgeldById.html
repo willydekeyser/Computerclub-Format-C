@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+	<p></p>
+	<h2>Lidgeld</h2>
+	<p th:text="'Id: ' + ${lidgeld.id}"></p>
+	<p th:text="'Lid: ' + ${lidgeld.leden.voornaam + ' ' + lidgeld.leden.familienaam}"></p>
+	<p th:text="'Datum: ' + ${#temporals.format(lidgeld.datum, 'dd-MM-yyyy')}"></p>
+	<p th:text="'Bedrag: €' + ${lidgeld.bedrag}"></p>
+</body>
+</html>

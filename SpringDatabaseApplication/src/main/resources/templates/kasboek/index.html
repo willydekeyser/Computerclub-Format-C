@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container-fluid">
+	<div class="row">
+		<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+			<div class="sidebar-sticky">
+				<div class="panel-group" id="jarenlijst">
+				    <div class="panel panel-default">
+				    	<div class="panel-heading">
+				          <a class="list-group-item kasboeklijst kasboeklijst_click" th:id="kasboek" th:text="Kasboek" th:jaar="0" th:rubriek="0" ></a>
+				      </div>
+				      </div>
+				      <div class="panel panel-default" th:each="jaartal : ${jaartal}">
+				      <div class="panel-heading">
+				          <a class="list-group-item kasboeklijst kasboeklijst_click" th:id="${jaartalStat.index}" data-toggle="collapse" th:href="'#collapse' + ${jaartalStat.index}" th:text="'&emsp;' + ${jaartal.jaartal}" th:jaar="${jaartal.jaartal}" th:rubriek="0" ></a>
+				      </div>
+				      <div th:id="'collapse' + ${jaartalStat.index}" class="panel-collapse collapse" data-parent="#jarenlijst" >
+				        <div class="list-group"th:each="rubriek : ${jaartal.Rubriek}">
+				          <a class="list-group-item kasboeklijst active kasboeklijst_click" th:href="'#'" th:text="'&emsp;&emsp;' + ${rubriek.rubriek}" th:jaar="${jaartal.jaartal}" th:rubriek="${rubriek.id}" ></a> 
+				        </div>
+				      </div>
+				    </div>
+			    </div>
+			</div>
+		</nav>
+		<div id="lijst" class="col-md-9 ml-sm-auto col-lg-10 px-4"></div>
+	</div>
+</div>
+<div class="pb-0 mb-0" style="height: 50px;"></div>
+
+<div id="newKasboekModalHolder"></div>
+<div id="updateKasboekModalHolder"></div>
+<div id="deleteKasboekModalHolder"></div>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		console.log("Kasboek document ready");
+		kasboeklijst();
+		kasboeklijst_geladen();
+	});
+</script>
+</body>
+</html>

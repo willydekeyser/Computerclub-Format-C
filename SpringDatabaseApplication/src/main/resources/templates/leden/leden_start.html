@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div>
+	<nav th:fragment="leden_start" class="">
+		<div id="lijst"></div>
+		<div id="leden_namenlijst"></div>
+	</nav>
+</div>
+			
+<div>
+	<div>				
+		<div>
+			<h1 style="margin-top: 150px; margin-left: 300px; font-size: 40px; color: green">WEBSITE LOADING......</h1>
+		</div>
+	</div>
+	<div id="editLidModalHolder"></div>
+	<div id="deleteLidModalHolder"></div>
+	
+	<div id="editLidgeldModalHolder"></div>
+</div>
+</body>
+</html>

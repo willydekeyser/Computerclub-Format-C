@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+	<div th:fragment="leden_menu" class="menu_select_soortleden">
+		<label for="select_leden">Select: </label>
+		<select id="select_leden">
+			<option th:each="soort : ${soorten}" th:id="${soort.id}"
+				th:value="${soort.id}" th:text="${soort.soortenleden}"
+				th:selected="${soort.actief}"></option>
+		</select>
+	</div>
+</body>
+</html>

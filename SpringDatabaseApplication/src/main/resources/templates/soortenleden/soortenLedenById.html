@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+	<p> </p>
+	<h2>Soorten leden</h2>
+    <p th:text="'Id: ' + ${soortenLeden.Id}"></p>
+    <p th:text="'Soorten leden: ' + ${soortenLeden.Soortenleden}"></p>
+   
+   	<table class="test">
+		<tr class="kop">
+			<th class="kop">Id</th>
+			<th class="kop">Naam</th>
+			<th class="kop">Adres</th>
+			<th class="kop">Inschrijving</th>
+		</tr>
+		<tr class="test" th:each="leden : ${soortenLeden.ledenlijsten}">
+			<td class="test" th:text="${leden.id}"></td>
+			<td class="test" th:text="${leden.voornaam} + ' ' + ${leden.familienaam}"></td>
+			<td class="test" th:text="${leden.straat} + ' ' + ${leden.nr} + ' - ' + ${leden.postnr} + ' ' + ${leden.gemeente}"></td>
+			<td class="test right" th:text="${#temporals.format(leden.datumlidgeld, 'dd-MM-yyyy')}"></td>
+
+		</tr>
+	</table>
+	<script>	
+	$(document).ready(function() {
+		$(document).contextmenu(function(event) {
+			event.preventDefault();
+		});
+	});
+</script>
+</body>
+</html>

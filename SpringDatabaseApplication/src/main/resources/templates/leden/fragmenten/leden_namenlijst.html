@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: header-css"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div th:fragment="leden_namenlijst">
+	<ol class="menu_lijst scroll_active" id="namenlijst_click">
+		<li class="menu_lijst_item" th:id="${leden.Id}"
+			th:each="leden : ${leden}" th:text="${ledenStat.count} + ' - ' + ${leden.voornaam} + ' ' + ${leden.familienaam}"></li>
+	</ol>
+</div>
+
+</body>
+</html>
