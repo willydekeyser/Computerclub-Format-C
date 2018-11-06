@@ -2,25 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header-css"></head>
 <body>
-<div th:fragment="login">
-<div class="container" style="margin-top:200px">
+<div th:fragment="login" class="login_container">
     <h1>Login</h1>
 	<div th:if="${param.error}" class="alert alert-danger">Invalid username and password.</div>
 	<div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
 	<form th:action="@{login}" method="post">
-		<div class="form-group">
+		<div class="login_form_groep">
 			<label for="username"><span class=""></span>Username:</label>
 			<input class="form-control" id="username" type="text" name="username" />
 		</div>
-		<div class="form-group">
+		<div class="login_form_groep">
 			<label class="password">Password:</label>
 			<input class="form-control" id="password" type="password" name="password" />
 		</div>
 		<div>
-			<input class="btn btn-primary" type="submit" value="Sign In" />
+			<input class="knop knop-groen" type="submit" value="Sign In" />
 		</div>
 	</form>
-</div>
 </div>  
 </body>
 </html>
