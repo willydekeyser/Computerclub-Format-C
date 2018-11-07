@@ -40,6 +40,10 @@ public class SecurityConfig {
 				.and()
 				.logout().permitAll()
 				.and()
+				.logout().deleteCookies("JSESSIONID")
+				.and()
+				.rememberMe().key("willydekeyser").tokenValiditySeconds(3600)
+				.and()
 				.exceptionHandling().accessDeniedPage("/");
 
 		}
