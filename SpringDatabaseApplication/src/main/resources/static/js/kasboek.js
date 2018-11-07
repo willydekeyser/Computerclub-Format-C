@@ -48,12 +48,17 @@ function kasboekSelect(id) {
 	$(id).closest('tr').addClass('active');
 };
 
-kasboeklijst = function() {
+function kasboeklijst() {
 	$('.kasboeklijst_click').on('click', function() {
+		$('.menuopen').css("display", "none");
+		$('.menuopen').removeClass('menuopen');
 		$('ol li.active').removeClass('active');
 		$(this).addClass('active');
-		document.getElementById("jaartal" + this.id).style.display = "block";
-		
+		let select = document.getElementById("jaartal" + this.id);
+		if (select) {
+			select.style.display = "block";
+			$(select).addClass('menuopen');
+		}
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
 		$.ajax({
