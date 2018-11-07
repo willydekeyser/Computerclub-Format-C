@@ -69,6 +69,20 @@ function kasboeklijst() {
 		});
 		
 	});
+	
+	$('.sub_kasboeklijst_click').on('click', function() {
+		$('ol li.active').removeClass('active');
+		$(this).addClass('active');
+		selectedJaar = $(this).attr("jaar");
+		selectedRubriek = $(this).attr("rubriek");
+		$.ajax({
+			url: "../kasboek/kasboekJaarRubriek?jaar=" + selectedJaar + "&rubriek=" + selectedRubriek,
+			success: function(data) {
+				$(".main_section_A").html(data);
+			}	
+		});
+		return false;
+	});
 };
 
 function kasboeklijst_geladen() {

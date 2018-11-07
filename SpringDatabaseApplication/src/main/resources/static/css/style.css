@@ -317,11 +317,29 @@ body{
 	padding-left: 0px;
 }
 
+.sub_menu_lijst {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	padding-left: 0px;
+	margin: 1.5rem 0rem 0rem 0rem;
+}
+
 .menu_lijst_item {
+	padding: 0.75rem 0rem 0.75rem 1.5rem;
+	border-color: #fff;
+	border: 1px solid rgba(0,0,0,0.125);
+	margin-bottom: -1px;
+}
+
+.sub_menu_lijst_item {
 	padding: .75rem 1.25rem;
 	border-color: #fff;
 	border: 1px solid rgba(0,0,0,0.125);
 	margin-bottom: -1px;
+	color: #000000;
+	font-weight: normal;
+	background-color: #FFFFFF;
 }
 
 .menu_lijst_item:hover {
@@ -330,13 +348,42 @@ body{
 	color: #FF0000;
 }
 
+.sub_menu_lijst_item:hover {
+	cursor: pointer;
+	font-weight: bold;
+	color: #FF0000;
+}
+
 .menu_lijst_item.active {
+	padding: 0.75rem 0rem 0.75rem 1.5rem;
 	z-index: 2;
-	color: #fff;
+	color: #FFFFFF;
 	background-color: green;
 	border-bottom-color: green
 }
 
+.sub_menu_lijst_item.active {
+	z-index: 2;
+	color: #FFFFFF;
+	background-color: green;
+	border-bottom-color: green
+}
+
+.menu_lijst_item.active:hover {
+	z-index: 2;
+	color: #FFFFFF;
+	font-weight: normal;
+	background-color: green;
+	border-bottom-color: green
+}
+
+.sub_menu_lijst_item.active:hover {
+	z-index: 2;
+	color: #FF0000;
+	font-weight: bold;
+	background-color: green;
+	border-bottom-color: green
+}
 
 
 h1 {color: green}
