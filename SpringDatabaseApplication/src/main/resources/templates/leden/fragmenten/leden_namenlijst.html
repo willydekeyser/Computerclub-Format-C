@@ -4,8 +4,9 @@
 <body>
 <div th:fragment="leden_namenlijst">
 	<ol class="menu_lijst" id="namenlijst_click">
-		<li class="menu_lijst_item" th:id="${leden.Id}"
-			th:each="leden : ${leden}" th:text="${ledenStat.count} + ' - ' + ${leden.voornaam} + ' ' + ${leden.familienaam}"></li>
+		<li class="menu_lijst_item" th:id="${leden.Id}" th:each="leden : ${leden}">
+			<span class="menu_lijst_item_tekst" th:text="${ledenStat.count} + ' - ' + ${leden.voornaam} + ' ' + ${leden.familienaam}"></span>
+		</li>
 	</ol>
 </div>
 

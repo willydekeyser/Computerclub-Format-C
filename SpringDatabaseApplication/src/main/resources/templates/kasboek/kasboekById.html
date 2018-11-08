@@ -3,8 +3,6 @@
 <head th:replace="fragments/header :: header-css"></head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-
-	<p> </p>
 	<h2>Kasboek</h2>
     <p th:text="'Id: ' + ${kasboek.Id}"></p>
     <p th:text="'Jaar: ' + ${kasboek.jaartal}"></p>
@@ -12,7 +10,6 @@
     <p th:text="'Omschrijving: ' + ${kasboek.omschrijving}"></p>
     <p th:text="'Datum: ' + ${#temporals.format(kasboek.datum, 'dd-MM-yyyy')}"></p>
     <p th:text="'Uitgaven: €' + ${kasboek.uitgaven}"></p>
-    <p th:text="'Inkomsten: €' + ${kasboek.inkomsten}"></p>
-   <div th:replace="fragments/footer :: footer"></div>	
+    <p th:text="'Inkomsten: €' + ${kasboek.inkomsten}"></p>	
 </body>
 </html>

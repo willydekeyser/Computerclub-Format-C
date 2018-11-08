@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header-css"></head>
 <body>
-<div th:replace="fragments/header :: header"></div>
 <div class="container-fluid">
     <p th:text="'Kasboek lijst: ' + ${aantal}" />
     <p th:text="'Totaal Uitgaven: €' + ${#numbers.formatDecimal(uitgaven, 1, 'DEFAULT', 2, 'DEFAULT')}" />
@@ -45,17 +44,5 @@
 <div id="updateKasboekModalHolder"></div>
 <div id="deleteKasboekModalHolder"></div>
 
-
-<script>
-$("table tr:last")[0].scrollIntoView();
-
-$(document).contextmenu(function(event){
-	event.preventDefault();
-});
-
-$('table').contextmenu(function(event){
-	alert( "Hello World!" );
-});
-</script>
 </body>
 </html>
