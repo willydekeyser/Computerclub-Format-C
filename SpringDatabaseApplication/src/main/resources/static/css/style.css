@@ -322,18 +322,23 @@ body{
 	flex-direction: column;
 	list-style: none;
 	padding-left: 0px;
-	margin: 1.5rem 0rem 0rem 0rem;
+	margin: 0rem 0rem 0rem 0rem;
 }
 
 .menu_lijst_item {
-	padding: 0.75rem 0rem 0.75rem 1.5rem;
+	padding: 0rem 0rem 0rem 0rem;
 	border-color: #fff;
 	border: 1px solid rgba(0,0,0,0.125);
 	margin-bottom: -1px;
 }
 
+.menu_lijst_item_tekst {
+	padding: 2rem 1rem 1rem 1rem;
+	line-height: 3rem;
+}
+
 .sub_menu_lijst_item {
-	padding: .75rem 1.25rem;
+	padding: .75rem 3rem;
 	border-color: #fff;
 	border: 1px solid rgba(0,0,0,0.125);
 	margin-bottom: -1px;
@@ -355,7 +360,7 @@ body{
 }
 
 .menu_lijst_item.active {
-	padding: 0.75rem 0rem 0.75rem 1.5rem;
+	padding: 0rem 0rem 0rem 0rem;
 	z-index: 2;
 	color: #FFFFFF;
 	background-color: green;

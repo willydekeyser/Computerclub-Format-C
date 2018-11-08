@@ -4,19 +4,16 @@
 <body>
 <div th:fragment="kasboek_start">
 	<ol class="menu_lijst" id="namenlijst_click">
-		<li class="menu_lijst_item kasboeklijst_click" th:id="kasboek" th:text="Kasboek" th:jaar="0" th:rubriek="0"></li>
+		<li class="menu_lijst_item kasboeklijst_click" th:id="kasboek" th:jaar="0" th:rubriek="0">
+			<span class="menu_lijst_item_tekst" th:text="Kasboek"></span>
+		</li>
 		<li class="menu_lijst_item kasboeklijst_click" th:id="${jaartal.Id}" th:each="jaartal : ${jaartal}" th:jaar="${jaartal.jaartal}" th:rubriek="0">
-			<span th:text="' ' + ${jaartal.jaartal}"></span>
+			<span class="menu_lijst_item_tekst" th:text="${jaartal.jaartal}"></span>
 			<ol class="sub_menu_lijst" th:id="'jaartal' +${jaartal.Id}" style="display: none;">
 				<li class="sub_menu_lijst_item sub_kasboeklijst_click" th:id="${rubriek.Id}" th:each="rubriek : ${jaartal.Rubriek}" th:text="${rubriek.rubriek}" th:jaar="${jaartal.jaartal}" th:rubriek="${rubriek.id}"></li>
 			</ol>
 		</li>
 	</ol>
 </div>	
-
-<div id="newKasboekModalHolder"></div>
-<div id="updateKasboekModalHolder"></div>
-<div id="deleteKasboekModalHolder"></div>
-
 </body>
 </html>
