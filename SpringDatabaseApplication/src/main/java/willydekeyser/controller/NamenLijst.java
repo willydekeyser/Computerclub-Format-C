@@ -32,6 +32,7 @@ public final class NamenLijst {
 	public static final String LOGIN_ADMIN = "Willy De Keyser";
 	public static final String ROLE_USER = "USER";
 	public static final String ROLE_ADMIN = "ADMIN";
+	public static final String ROLE_GOLD = "GOLD";
 	
 	public static final String UITGAVEN = "uitgaven";
 	public static final String INKOMSTEN = "inkomsten";

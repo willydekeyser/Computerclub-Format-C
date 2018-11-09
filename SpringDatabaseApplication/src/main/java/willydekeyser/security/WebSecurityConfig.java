@@ -1,6 +1,6 @@
 package willydekeyser.security;
 
-import static willydekeyser.controller.NamenLijst.ROLE_ADMIN;
+import static willydekeyser.controller.NamenLijst.ROLE_GOLD;
 import static willydekeyser.controller.NamenLijst.ROLE_USER;
 
 import javax.sql.DataSource;
@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/leden/**").hasRole(ROLE_USER)
 			.antMatchers("/rubriek/**").hasRole(ROLE_USER)
 			.antMatchers("/soortenleden/**").hasRole(ROLE_USER)
-			.antMatchers("/restcontroller/**").hasRole(ROLE_ADMIN)
+			.antMatchers("/restcontroller/**").hasRole(ROLE_GOLD)
 			.and()
 			.formLogin().loginPage("/login").permitAll()
 			.and()
