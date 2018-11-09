@@ -21,9 +21,9 @@
 			<th class="kop">Jaar</th>
 			<th class="kop">Rubriek</th>
 			<th class="kop">Omschrijving</th>
-			<th class="kop">Datum</th>
-			<th class="kop">Uitgaven</th>
-			<th class="kop">Inkomsten</th>
+			<th class="kop right">Datum</th>
+			<th class="kop right">Uitgaven</th>
+			<th class="kop right">Inkomsten</th>
 		</tr>
 		<tr class="test" onclick="kasboekSelect(this)" th:each="kasboek : ${kasboek}" th:id="${kasboek.id}">
 			<td style="width: 50px" class="test" th:text="${kasboekStat.count}"></td>

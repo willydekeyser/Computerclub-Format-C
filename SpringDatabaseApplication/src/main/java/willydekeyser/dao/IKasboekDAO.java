@@ -11,7 +11,7 @@ public interface IKasboekDAO {
 	List<Kasboek> getAllKasboek();
 	List<Kasboek> getAllKasboekRubriek();
 	List<Kasboek> getAllKasboekRubriekJaarRubriek(Integer jaartal, Integer rubriekId);
-	BigDecimal[] getSom();
+	BigDecimal[] getSom(Integer jaar, Integer rubriekId);
 	List<Integer> getJaartal();
 	List<KasboekJaartal> getKasboekJaarRubriek();
 	Kasboek getKasboekById(int id);

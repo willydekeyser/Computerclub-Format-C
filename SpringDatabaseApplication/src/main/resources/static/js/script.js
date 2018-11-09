@@ -77,6 +77,13 @@ async function Load_JSON(url, div) {
 	return 'OK';
 };
 
+async function fetch_JSON(url) {
+	let response = await fetch(url);
+	let data = await response.json();
+	console.log('Data: ' + data);
+	return data;
+}
+
 async function post_Form(url, form) {
 	console.log('Post Form: ' + url + ' - ' + form);
 	let response = await fetch(url, {

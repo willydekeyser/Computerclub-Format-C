@@ -20,6 +20,12 @@ public class KasboekTotaalExtractor implements ResultSetExtractor<BigDecimal[]>{
 			inkomsten = rs.getBigDecimal("inkomsten");
 		}
 		
+		if (uitgaven == null) {
+			uitgaven = new BigDecimal(0);
+		}
+		if (inkomsten == null) {
+			inkomsten = new BigDecimal(0);
+		}
 		return new BigDecimal[] {uitgaven ,inkomsten, inkomsten.subtract(uitgaven)};
 	}	
 }

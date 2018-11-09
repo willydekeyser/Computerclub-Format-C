@@ -40,6 +40,9 @@ public class KasboekDAO implements IKasboekDAO {
 			+ "WHERE kasboek.RubriekId = rubriek.Id AND kasboek.Jaartal = ? AND rubriek.Id = ? "
 			+ "ORDER BY kasboek.Id";
 	private final String sql_getSom = "SELECT SUM(uitgaven) AS uitgaven, SUM(inkomsten) AS inkomsten FROM kasboek";
+	private final String sql_getSomJaartal = "SELECT SUM(uitgaven) AS uitgaven, SUM(inkomsten) AS inkomsten FROM kasboek WHERE Jaartal = ?";
+	private final String sql_getSomRubriek = "SELECT SUM(uitgaven) AS uitgaven, SUM(inkomsten) AS inkomsten FROM kasboek WHERE Rubriek = ?";
+	private final String sql_getSomJaartalRubriek = "SELECT SUM(uitgaven) AS uitgaven, SUM(inkomsten) AS inkomsten FROM kasboek WHERE Jaartal = ? AND RubriekId = ?";
 	private final String sql_getKasboekJaarRubriek = "SELECT kasboek.Id, kasboek.Jaartal, rubriek.Id, rubriek.Rubriek "
 			+ "FROM kasboek, rubriek WHERE kasboek.RubriekId= rubriek.Id "
 			+ "GROUP BY kasboek.Jaartal, kasboek.RubriekId "
@@ -79,8 +82,17 @@ public class KasboekDAO implements IKasboekDAO {
 	}
 	
 	@Override
-	public BigDecimal[] getSom() {
-		return jdbcTemplate.query(sql_getSom, new KasboekTotaalExtractor());
+	public BigDecimal[] getSom(Integer jaar, Integer rubriekId) {
+		if (jaar == 0 & rubriekId == 0) {
+			return jdbcTemplate.query(sql_getSom, new KasboekTotaalExtractor());
+		} else if(jaar != 0 & rubriekId == 0) {
+			return jdbcTemplate.query(sql_getSomJaartal, new KasboekTotaalExtractor(), jaar);
+		} else if (jaar ==0 & rubriekId != 0) {
+			return jdbcTemplate.query(sql_getSomRubriek, new KasboekTotaalExtractor(), rubriekId);
+		} else {
+			return jdbcTemplate.query(sql_getSomJaartalRubriek, new KasboekTotaalExtractor(), jaar, rubriekId);
+		}
+		
 	}
 	
 	@Override

@@ -33,8 +33,8 @@ public class KasboekService implements IKasboekService {
 	}
 	
 	@Override
-	public BigDecimal[] getSom() {
-		return kasboekDAO.getSom();
+	public BigDecimal[] getSom(Integer jaar, Integer rubriekId) {
+		return kasboekDAO.getSom(jaar, rubriekId);
 	}
 	
 	@Override

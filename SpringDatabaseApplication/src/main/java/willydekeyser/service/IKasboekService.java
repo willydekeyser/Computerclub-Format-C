@@ -12,7 +12,7 @@ public interface IKasboekService {
 	List<Kasboek> getAllKasboekRubriek();
 	List<KasboekJaartal> getKasboekJaarRubriek();
 	List<Kasboek> getAllKasboekRubriekJaarRubriek(Integer jaartal, Integer rubriekId);
-	BigDecimal[] getSom();
+	BigDecimal[] getSom(Integer jaar, Integer rubriekId);
 	List<Integer> getJaartal();
 	Kasboek getKasboekById(int id);
 	Kasboek addKasboek(Kasboek kasboek);

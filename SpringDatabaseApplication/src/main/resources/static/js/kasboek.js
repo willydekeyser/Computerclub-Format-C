@@ -1,5 +1,7 @@
 let kasboekId = 0;
 let selectedId = 0;
+let selectedJaar = 0;
+let selectedRubriek = 0;
 
 async function kasboek_start() {
 	console.log('------------------------------------------------------------');
@@ -61,12 +63,8 @@ function kasboeklijst() {
 		}
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
-		$.ajax({
-			url: "../kasboek/kasboekJaarRubriek?jaar=" + selectedJaar + "&rubriek=" + selectedRubriek,
-			success: function(data) {
-				$(".main_section_A").html(data);
-			}	
-		});
+		laad_Totalen();
+		Refrech_HTML('/kasboek/kasboekJaarRubriek/' + selectedJaar + '/' + selectedRubriek, '.main_section_A');
 		
 	});
 	
@@ -75,25 +73,27 @@ function kasboeklijst() {
 		$(this).addClass('active');
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
-		$.ajax({
-			url: "../kasboek/kasboekJaarRubriek?jaar=" + selectedJaar + "&rubriek=" + selectedRubriek,
-			success: function(data) {
-				$(".main_section_A").html(data);
-			}	
-		});
+		laad_Totalen();
+		Refrech_HTML('/kasboek/kasboekJaarRubriek/' + selectedJaar + '/' + selectedRubriek, '.main_section_A');
 		return false;
 	});
 };
 
 function kasboeklijst_geladen() {
 	$('#namenlijst_click #kasboek').addClass('active');
-	$.ajax({
-		url: "../kasboek/kasboekJaarRubriek?jaar=0&rubriek=0",
-		success: function(data) {
-			$(".main_section_A").html(data);
-		}	
-	});
+	laad_Totalen();
+
+	Refrech_HTML('/kasboek/kasboekJaarRubriek/0/0', '.main_section_A')
 	$(document).contextmenu(function(event){
 		event.preventDefault();
 	});
 };
+
+async function laad_Totalen() {
+	let data = await fetch_JSON('/kasboek/restcontroller/kasboekTotalen/' + selectedJaar + '/' + selectedRubriek);
+	let html = ``;
+	console.log('Totalen: ' + data.Jaar);
+	$('.main_section_B').html(`<p>Jaar: ${data.Jaar} Rubriek: ${data.Rubriek}</p> 
+	Inkomsten: €${data.Totalen[0].Inkomsten} Uitgaven: €${data.Totalen[0].Uitgaven} Totaal: €${data.Totalen[0].Totaal}</br>
+	Inkomsten: €${data.Totalen[1].Inkomsten} Uitgaven: €${data.Totalen[1].Uitgaven} Totaal: €${data.Totalen[1].Totaal}`);
+}

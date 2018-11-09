@@ -14,26 +14,30 @@
 </div>
 <div class="scrolldiv">
 <table class="test">
+	<thead>
 	<tr class="kop">
 		<th class="kop">Nr</th>
 		<th class="kop">Id</th>
 		<th class="kop">Jaar</th>
 		<th class="kop">Rubriek</th>
 		<th class="kop">Omschrijving</th>
-		<th class="kop">Datum</th>
-		<th class="kop">Uitgaven</th>
-		<th class="kop">Inkomsten</th>
+		<th class="kop right">Datum</th>
+		<th class="kop right">Uitgaven</th>
+		<th class="kop right">Inkomsten</th>
 	</tr>
+	</thead>
+	<tbody>
 	<tr class="test" onclick="kasboekSelect(this)" th:each="kasboek : ${kasboek}" th:id="${kasboek.id}">
 		<td style="width: 50px" class="test" th:text="${kasboekStat.count}"></td>
 		<td style="width: 50px" class="test" th:text="${kasboek.id}"></td>
 		<td style="width: 50px" class="test" th:text="${kasboek.jaartal}"></td>
 		<td style="width: 200px" class="test" th:text="${kasboek.rubriek.rubriek}"></td>
 		<td class="test" th:text="${kasboek.omschrijving}"></td>
-		<td style="width: 100px" class="test right" th:text="${#temporals.format(kasboek.datum, 'dd-MM-yyyy', locale)}"></td>
-		<td style="width: 100px" class="test right" th:text="'€' + ${#numbers.formatDecimal(kasboek.uitgaven, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
-		<td style="width: 100px" class="test right" th:text="'€' + ${#numbers.formatDecimal(kasboek.inkomsten, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+		<td style="width: 80px" class="test right" th:text="${#temporals.format(kasboek.datum, 'dd-MM-yyyy', locale)}"></td>
+		<td style="width: 80px" class="test right" th:text="'€' + ${#numbers.formatDecimal(kasboek.uitgaven, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+		<td style="width: 80px" class="test right" th:text="'€' + ${#numbers.formatDecimal(kasboek.inkomsten, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
 	</tr>
+	</tbody>
 </table>
 </div>
 
