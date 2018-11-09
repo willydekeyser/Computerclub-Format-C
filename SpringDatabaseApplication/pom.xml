@@ -6,7 +6,7 @@
 	<groupId>willydekeyser</groupId>
 	<artifactId>SpringDatabaseApplication</artifactId>
 	<version>1.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>SpringDatabaseApplication</name>
 	<description>Spring Database App</description>

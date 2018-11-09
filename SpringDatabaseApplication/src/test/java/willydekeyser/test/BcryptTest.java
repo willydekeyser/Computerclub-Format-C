@@ -1,6 +1,6 @@
 package willydekeyser.test;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class BcryptTest {
