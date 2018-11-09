@@ -1,10 +1,10 @@
 package willydekeyser.security;
 
 
-import static willydekeyser.controller.NamenLijst.LOGIN_ADMIN;
-import static willydekeyser.controller.NamenLijst.LOGIN_USER;
 import static willydekeyser.controller.NamenLijst.ROLE_ADMIN;
 import static willydekeyser.controller.NamenLijst.ROLE_USER;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +13,14 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@EnableWebSecurity
+
 public class SecurityConfig {
+	
+	@Autowired
+	private DataSource dataSource;
 
 	@Configuration
 	@Order(1)
@@ -52,7 +54,7 @@ public class SecurityConfig {
 	@Configuration
 	@Order(2)
 	public static class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
-
+		
 		@Override
 		protected void configure(HttpSecurity httpSecurity) throws Exception {
 			httpSecurity.authorizeRequests().anyRequest().permitAll();
@@ -65,10 +67,12 @@ public class SecurityConfig {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser(LOGIN_USER).password(passwordEncoder().encode("willy")).roles(ROLE_USER)
-			.and()
-			.withUser(LOGIN_ADMIN).password(passwordEncoder().encode("willy")).roles(ROLE_ADMIN, ROLE_USER);
+		auth.jdbcAuthentication()
+			.dataSource(dataSource)
+			.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
+			.authoritiesByUsernameQuery("SELECT username, authority FROM authorities WHERE username = ?");
+			
+		
 	}
 
 	@Bean

@@ -21,7 +21,7 @@
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/rubriek.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/soortenLeden.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/agenda.js}"></script>
-    <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/restcontroller.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_GOLD'')')}" type="text/javascript" th:src="@{/js/restcontroller.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/contextmenu.js}"></script>
     
     <meta charset="UTF-8"></meta>
@@ -69,7 +69,7 @@
 	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
 		<a id="agenda" class="navigation_link" href="/">Agenda</a>
 	</li>
-	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+	<li class="navigation_item" th:if="${#authorization.expression('hasRole(''ROLE_GOLD'')')}">
 		<a id="restcontroller" class="navigation_link" href="/">Rest Controller</a>
 	</li>
 	<li class="navigation_item" th:if="${#authorization.expression('!isAuthenticated()')}"><a

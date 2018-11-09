@@ -6,6 +6,8 @@
 <div th:fragment="start_main">
 	<div class="">	
 		<p th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:text="${'Gebruikers naam: ' + user + ' - ' + roles}"></p>
+		<p th:text="${'Gebruikers naam: ' + user + ' - ' + roles}"></p>
+		
 	</div>
 	
 	<div class="">
