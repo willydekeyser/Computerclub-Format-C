@@ -63,9 +63,9 @@ function kasboeklijst() {
 		}
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
-		laad_Totalen();
 		Refrech_HTML('/kasboek/kasboekJaarRubriek/' + selectedJaar + '/' + selectedRubriek, '.main_section_A');
-		
+		laad_Totalen();
+		return false;
 	});
 	
 	$('.sub_kasboeklijst_click').on('click', function() {
@@ -73,17 +73,16 @@ function kasboeklijst() {
 		$(this).addClass('active');
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
-		laad_Totalen();
 		Refrech_HTML('/kasboek/kasboekJaarRubriek/' + selectedJaar + '/' + selectedRubriek, '.main_section_A');
+		laad_Totalen();
 		return false;
 	});
 };
 
 function kasboeklijst_geladen() {
 	$('#namenlijst_click #kasboek').addClass('active');
-	laad_Totalen();
-
 	Refrech_HTML('/kasboek/kasboekJaarRubriek/0/0', '.main_section_A')
+	laad_Totalen();
 	$(document).contextmenu(function(event){
 		event.preventDefault();
 	});
