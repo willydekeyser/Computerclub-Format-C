@@ -6,10 +6,10 @@
 </head>
 <body>
 
-<div th:fragment="newKasboekModal">
-	<div class="newKasboekForm">
-		<Form th:action="@{/kasboek/save_newKasboek}" method="post" th:object="${Kasboek}">
-			<div class="modal fade" id="newKasboekModal" role="dialog">
+<div th:fragment="editKasboekModal">
+	<div class="editKasboekForm">
+		<Form th:action="@{/kasboek/save_editKasboek}" method="post" th:object="${Kasboek}">
+			<div class="modal fade" id="editKasboekModal" role="dialog">
 				<div class="modal-dialog modal-lg" >
 					<!-- Modal content-->
 				<div class="modal-content">
@@ -64,11 +64,7 @@
 		</div>
 	</Form>
 </div>
-	<script type="text/javascript">
-		$('#newKasboekModal').on('shown.bs.modal', function() {
-			$("input[name=jaartal]").focus();
-		});
-	</script>
+	
 </div>
 
 <div th:fragment="updateKasboekModal">
@@ -129,11 +125,7 @@
 		</div>
 	</Form>
 </div>
-	<script type="text/javascript">
-		$('#updateKasboekModal').on('shown.bs.modal', function() {
-			$("input[name=jaartal]").focus();
-		});
-	</script>
+	
 </div>
 
 <div th:fragment="deleteKasboekModal">
@@ -195,11 +187,7 @@
 		</div>
 	</Form>
 </div>
-	<script type="text/javascript">
-		$('#deleteKasboekModal').on('shown.bs.modal', function() {
-			$("input[name=jaartal]").focus();
-		});
-	</script>
+	
 </div>
 
 </body>

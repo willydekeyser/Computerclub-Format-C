@@ -6,8 +6,6 @@ import static willydekeyser.controller.NamenLijst.INKOMSTEN;
 import static willydekeyser.controller.NamenLijst.JAAR;
 import static willydekeyser.controller.NamenLijst.JAARTAL;
 import static willydekeyser.controller.NamenLijst.KASBOEK;
-import static willydekeyser.controller.NamenLijst.MODAL_DISABLEKNOP;
-import static willydekeyser.controller.NamenLijst.MODAL_KNOP;
 import static willydekeyser.controller.NamenLijst.MODAL_TITEL;
 import static willydekeyser.controller.NamenLijst.PAGINA_TITEL;
 import static willydekeyser.controller.NamenLijst.RUBRIEK;
@@ -60,7 +58,7 @@ public class KasboekController {
 		model.addAttribute(JAARTAL, jaartal);
 		model.addAttribute(KASBOEK, kasboekLijst);
 		model.addAttribute(AANTAL, kasboekLijst.size());
-		return "kasboek/index :: kasboek_start";
+		return "kasboek/kasboek_menu :: kasboek_start";
 	}
 	
 	@GetMapping("/kasboek")
@@ -96,8 +94,8 @@ public class KasboekController {
         return "kasboek/kasboeklijst :: kasboektabel";
     }
     
-	@GetMapping(value="/newKasboek")
-	public String newKasboek(ModelMap model) {
+	@GetMapping(value="/editKasboek")
+	public String editKasboek(ModelMap model) {
 		rubrieken = rubriekservice.getAllRubriek();
 		Kasboek newKasboek = new Kasboek();
 		newKasboek.setId(0);
@@ -108,64 +106,12 @@ public class KasboekController {
 		model.addAttribute(MODAL_TITEL, "New Soort!");
 		model.addAttribute(KASBOEK, newKasboek);
 		model.addAttribute(RUBRIEK, rubrieken);
-		return "kasboek/fragmenten/kasboekmodal :: newKasboekModal";
+		return "kasboek/fragmenten/kasboekmodal :: editKasboekModal";
 	}
 	
 	@PostMapping(value="/save_newKasboek")
 	public String saveNewKasboek(@Validated Kasboek kasboek, BindingResult bindingResult, Model model) {
 		kasboek = kasboekservice.addKasboek(kasboek);
-		kasboek(model);
-		return "/kasboek/kasboek";
-	}
-	
-	@GetMapping(value="/updateKasboek")
-	public String updateKasboek(@RequestParam(name = "id")  Integer id, ModelMap model) {
-		rubrieken = rubriekservice.getAllRubriek();
-		model.addAttribute(MODAL_TITEL, "Update kasboek!");
-		model.addAttribute(MODAL_KNOP, "Aanpassen");
-		if (id != 0) {
-			model.addAttribute(KASBOEK, kasboekservice.getKasboekById(id));
-			model.addAttribute(MODAL_DISABLEKNOP, false);
-		} else {
-			Kasboek kasboek = new Kasboek();
-			kasboek.setRubriek(new Rubriek());
-			model.addAttribute(KASBOEK, kasboek);
-			model.addAttribute(MODAL_TITEL, "Je hebt geen selectie gemaakt!!");
-			model.addAttribute(MODAL_DISABLEKNOP, true);
-		}
-		model.addAttribute(RUBRIEK, rubrieken);
-		return "kasboek/fragmenten/kasboekmodal :: updateKasboekModal";
-	}
-	
-	@PostMapping(value="/save_updateKasboek")
-	public String saveUpdateKasboek(@Validated Kasboek kasboek, BindingResult bindingResult, Model model) {
-		kasboek = kasboekservice.updateKasboek(kasboek);
-		kasboek(model);
-		return "/kasboek/kasboek";
-	}
-	
-	@GetMapping(value="/deleteKasboek")
-	public String deleteKasboek(@RequestParam(name = "id")  Integer id, ModelMap model) {
-		rubrieken = rubriekservice.getAllRubriek();
-		model.addAttribute(MODAL_TITEL, "Delete kasboek!");
-		model.addAttribute(MODAL_KNOP, "Verwijderen");
-		if (id != 0) {
-			model.addAttribute(KASBOEK, kasboekservice.getKasboekById(id));
-			model.addAttribute(MODAL_DISABLEKNOP, false);
-		} else {
-			Kasboek kasboek = new Kasboek();
-			kasboek.setRubriek(new Rubriek());
-			model.addAttribute(KASBOEK, kasboek);
-			model.addAttribute(MODAL_TITEL, "Je hebt geen selectie gemaakt!!");
-			model.addAttribute(MODAL_DISABLEKNOP, true);
-		}
-		model.addAttribute(RUBRIEK, rubrieken);
-		return "kasboek/fragmenten/kasboekmodal :: deleteKasboekModal";
-	}
-	
-	@PostMapping(value="/save_deleteKasboek")
-	public String saveDeleteKasboek(@Validated Kasboek kasboek, BindingResult bindingResult, Model model) {
-		kasboekservice.deleteKasboek(kasboek.getId());
 		kasboek(model);
 		return "/kasboek/kasboek";
 	}

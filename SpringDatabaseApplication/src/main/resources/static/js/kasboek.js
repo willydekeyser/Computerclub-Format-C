@@ -15,33 +15,105 @@ async function kasboek_start() {
 }
 
 function newKasboek() {
-	$.ajax({
-		url: "/kasboek/newKasboek",
-		success: function(data) {
-			$("#newKasboekModalHolder").html(data);
-			$("#newKasboekModal").modal("show");
-		}
-	})
+	console.log("New kasboek");
+	if($("#editKasboekModal").length == 0){
+		let data = load_HTML('/kasboek/editKasboek')
+		.then((data) => {
+			$("#editKasboekModalHolder").html(data);
+			setup_newKasboekModal();
+		})
+		.catch((error) => {
+			console.log('FOUT: ' + error);
+		});
+	} else {
+		setup_newKasboekModal();
+	};
+};
+
+function setup_newKasboekModal() {
+	$('#modal-titel').html('New kasboek!');
+	$("#editKasboekModal").modal("show");
+};
+
+function listener_newKasboek_focus() {
+	$("input[name='voornaam']").focus();
+};
+
+function listener_newkasboek_hidden() {
+	$('#editKasboekModalForm').unbind();
+	$('#editKasboekModalForm').trigger('reset');
+};
+
+function listener_newKasboek_submit() {
+	
 };
 
 function updateKasboek() {
-	$.ajax({
-		url: "/kasboek/updateKasboek?id=" + kasboekId,
-		success: function(data) {
-			$("#updateKasboekModalHolder").html(data);
-			$("#updateKasboekModal").modal("show");
-		}
-	})
+	console.log("Edit kasboek");
+	if($("#editKasboekModal").length == 0){
+		let data = load_HTML('/kasboek/editKasboek')
+		.then((data) => {
+			$("#editKasboekModalHolder").html(data);
+			setup_updateKasboekModal();
+		})
+		.catch((error) => {
+			console.log('FOUT: ' + error);
+		});
+	} else {
+		setup_updateKasboekModal();
+	};
+};
+
+function setup_updateKasboekModal() {
+	$('#modal-titel').html('Update kasboek!');
+	$("#editKasboekModal").modal("show");
+};
+
+function listener_updateKasboek_focus() {
+	$("input[name='voornaam']").focus();
+};
+
+function listener_updatekasboek_hidden() {
+	$('#editKasboekModalForm').unbind();
+	$('#editKasboekModalForm').trigger('reset');
+};
+
+function listener_updateKasboek_submit() {
+	
 };
 
 function deleteKasboek() {
-	$.ajax({
-		url: "/kasboek/deleteKasboek?id=" + kasboekId,
-		success: function(data) {
-			$("#deleteKasboekModalHolder").html(data);
-			$("#deleteKasboekModal").modal("show");
-		}
-	})
+	console.log("Delete kasboek");
+	if($("#editKasboekModal").length == 0){
+		let data = load_HTML('/kasboek/editKasboek')
+		.then((data) => {
+			$("#editKasboekModalHolder").html(data);
+			setup_deleteKasboekModal();
+		})
+		.catch((error) => {
+			console.log('FOUT: ' + error);
+		});
+	} else {
+		setup_deleteKasboekModal();
+	};
+};
+
+function setup_deleteKasboekModal() {
+	$('#modal-titel').html('Delete kasboek!');
+	$("#editKasboekModal").modal("show");
+};
+
+function listener_deleteKasboek_focus() {
+	$("input[name='voornaam']").focus();
+};
+
+function listener_deletekasboek_hidden() {
+	$('#editKasboekModalForm').unbind();
+	$('#editKasboekModalForm').trigger('reset');
+};
+
+function listener_delteKasboek_submit() {
+	
 };
 
 function kasboekSelect(id) {
