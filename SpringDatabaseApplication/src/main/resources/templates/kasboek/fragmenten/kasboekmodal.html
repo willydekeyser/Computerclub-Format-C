@@ -32,7 +32,6 @@
 								<option value="" disabled selected >Select rubriek!</option>
 								<option th:selected="false" th:each="rubriek : ${rubriek}" th:value="${rubriek.id}" th:text="${rubriek.rubriek}" ></option>
 							</select>
-			
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2">Omschrijving:</label>
@@ -46,12 +45,12 @@
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2">Uitgaven:</label>
-							<input type="number" class="col-sm-4 currency right" step="0.01" id="uitgaven" name="uitgaven" title="Uitgaven invullen!" placeholder="Uitgaven" required />
+							<input type="number" class="col-sm-4 currency right" step="0.01" data-number-to-fixed="2" id="uitgaven" name="uitgaven" title="Uitgaven invullen!" placeholder="Uitgaven" required />
 			
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2">Inkomsten:</label>
-							<input type="number" class="col-sm-4 currency right" step="0.01" id="inkomsten" name="inkomsten" title="Inkomsten invullen!" placeholder="Inkomsten" required  />
+							<input type="number" class="col-sm-4 currency right" step="0.01" data-number-to-fixed="2" id="inkomsten" name="inkomsten" title="Inkomsten invullen!" placeholder="Inkomsten" required  />
 			
 						</div>
 					</div>

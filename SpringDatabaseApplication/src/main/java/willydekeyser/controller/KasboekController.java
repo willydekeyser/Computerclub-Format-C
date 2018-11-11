@@ -140,6 +140,12 @@ public class KasboekController {
 		return totalen;
 	}
 	
+	@GetMapping("/restcontroller/kasboekbyid/{id}")
+	public @ResponseBody Kasboek restConrollerledenById(@PathVariable Integer id) {
+		kasboek = kasboekservice.getKasboekById(id);
+		return kasboek;
+	}
+	
 	@GetMapping("/restcontroller/kasboek")
 	public @ResponseBody List<Kasboek> kasboek() {	
 		return kasboekservice.getAllKasboek();
