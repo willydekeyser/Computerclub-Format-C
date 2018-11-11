@@ -6,14 +6,12 @@ import static willydekeyser.controller.NamenLijst.INKOMSTEN;
 import static willydekeyser.controller.NamenLijst.JAAR;
 import static willydekeyser.controller.NamenLijst.JAARTAL;
 import static willydekeyser.controller.NamenLijst.KASBOEK;
-import static willydekeyser.controller.NamenLijst.MODAL_TITEL;
 import static willydekeyser.controller.NamenLijst.PAGINA_TITEL;
 import static willydekeyser.controller.NamenLijst.RUBRIEK;
 import static willydekeyser.controller.NamenLijst.TOTAAL;
 import static willydekeyser.controller.NamenLijst.UITGAVEN;
 
 import java.math.BigDecimal;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +44,7 @@ public class KasboekController {
 
 	private List<Kasboek> kasboekLijst = new ArrayList<>();
 	private List<Rubriek> rubrieken = null;
+	private Kasboek kasboek = null;
 	
 	@GetMapping("/")
 	public String index(Model model) {	
@@ -97,23 +95,27 @@ public class KasboekController {
 	@GetMapping(value="/editKasboek")
 	public String editKasboek(ModelMap model) {
 		rubrieken = rubriekservice.getAllRubriek();
-		Kasboek newKasboek = new Kasboek();
-		newKasboek.setId(0);
-		newKasboek.setJaartal(Year.now().getValue());
-		newKasboek.setRubriek(new Rubriek(0,""));
-		newKasboek.setUitgaven(new BigDecimal(0));
-		newKasboek.setInkomsten(new BigDecimal(0));
-		model.addAttribute(MODAL_TITEL, "New Soort!");
-		model.addAttribute(KASBOEK, newKasboek);
 		model.addAttribute(RUBRIEK, rubrieken);
 		return "kasboek/fragmenten/kasboekmodal :: editKasboekModal";
 	}
 	
-	@PostMapping(value="/save_newKasboek")
-	public String saveNewKasboek(@Validated Kasboek kasboek, BindingResult bindingResult, Model model) {
-		kasboek = kasboekservice.addKasboek(kasboek);
-		kasboek(model);
-		return "/kasboek/kasboek";
+	@PostMapping("/save_newKasboek")
+	public @ResponseBody Kasboek save_NewKasboek(@Validated Kasboek kasboek) {
+		this.kasboek = kasboekservice.addKasboek(kasboek);
+		return this.kasboek;
+	}
+	
+	@PostMapping("/save_updateKasboek")
+	public @ResponseBody Kasboek save_updateKasboek(@Validated Kasboek kasboek) {
+		kasboekservice.updateKasboek(kasboek);
+		this.kasboek = kasboekservice.getKasboekById(kasboek.getId());
+		return this.kasboek;
+	}
+	
+	@PostMapping("/save_deleteKasboek")
+	public @ResponseBody Kasboek save_deleteKasboek(@Validated Integer id) {
+		kasboekservice.deleteKasboek(id);
+		return null;
 	}
 	
 /**

@@ -241,15 +241,15 @@ public class LedenController {
 	
 	@PostMapping("/save_newLid")
 	public @ResponseBody Leden save_newLid(@Validated  Leden lid) {
-		lid = ledenservice.addLeden(lid);
-		return lid;
+		this.lid = ledenservice.addLeden(lid);
+		return this.lid;
 	}
 	
 	@PostMapping("/save_updateLid")
 	public @ResponseBody Leden save_updateLid(@Validated  Leden lid, Boolean soort, Boolean naam) {
 		ledenservice.updateLeden(lid);
-		lid = ledenservice.getLedenById(lid.getId());
-		return lid;
+		this.lid = ledenservice.getLedenById(lid.getId());
+		return this.lid;
 	}
 	
 	@PostMapping("/save_deleteLid")

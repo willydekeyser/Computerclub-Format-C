@@ -32,11 +32,28 @@ function newKasboek() {
 
 function setup_newKasboekModal() {
 	$('#modal-titel').html('New kasboek!');
+	$('#editKasboekModal').one('shown.bs.modal', listener_newKasboek_focus);
+	$('#editKasboekModal').one('hidden.bs.modal', listener_newkasboek_hidden);
+	$('#editKasboekModalForm').one('submit', listener_newKasboek_submit);
+	if (selectedJaar != 0) {
+		$('#editKasboekModalForm #jaartal').val(selectedJaar);
+	};
+	if (selectedRubriek != 0) {
+		$('#editKasboekModalForm #rubriek').val(selectedRubriek);
+	};
 	$("#editKasboekModal").modal("show");
 };
 
 function listener_newKasboek_focus() {
-	$("input[name='voornaam']").focus();
+	if (selectedJaar == 0) {
+		$("input[name='jaartal']").focus();
+		return;
+	};
+	if (selectedRubriek == 0) {
+		$("input[name='rubriek.id']").focus();
+		return;
+	};
+	$("input[name='omschrijving']").focus();
 };
 
 function listener_newkasboek_hidden() {
@@ -45,7 +62,17 @@ function listener_newkasboek_hidden() {
 };
 
 function listener_newKasboek_submit() {
-	
+	let form = $(this);
+	let data = post_Form('/kasboek/save_newKasboek', form)
+	.then((data) => {
+		selectedId = data.id;
+		$("#editKasboekModal").modal('toggle');
+		console.log('New Kasboek: ');
+	})
+	.catch((error) => {
+		console.log('FOUT: ' + error);
+	});
+	return false;
 };
 
 function updateKasboek() {

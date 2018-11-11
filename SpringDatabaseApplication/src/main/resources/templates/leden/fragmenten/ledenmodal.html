@@ -79,7 +79,7 @@
 
 <div th:fragment="deleteLidModal">
 	<div class="verwijderenlidForm">
-		<Form th:action="@{/leden/save_deleteLid}" method="post" th:object="${Leden}" id="deleteLidModalForm">
+		<Form method="post" th:object="${Leden}" id="deleteLidModalForm">
 			<div class="modal fade" id="deleteLidModal" role="dialog">
 				<div class="modal-dialog">
 					<!-- Modal content-->
