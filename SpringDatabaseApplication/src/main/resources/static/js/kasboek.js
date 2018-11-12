@@ -33,6 +33,9 @@ function newKasboek() {
 
 function setup_newKasboekModal() {
 	$('#modal-titel').html('New kasboek!');
+	$('#editKasboekModal #modal-titel').removeClass('text-danger');
+	$('#editKasboek_save').prop('disabled', false);
+	$('#editKasboek_save').show();
 	$('#editKasboekModal').one('shown.bs.modal', listener_newKasboek_focus);
 	$('#editKasboekModal').one('hidden.bs.modal', listener_newkasboek_hidden);
 	$('#editKasboekModalForm').one('submit', listener_newKasboek_submit);
@@ -93,22 +96,30 @@ function updateKasboek() {
 };
 
 function setup_updateKasboekModal() {
-	$('#modal-titel').html('Update kasboek!');
+	if (kasboek_gegevens == "") {
+		$('#editKasboekModal #modal-titel').html('Je hebt geen selectie gemaakt!');
+		$('#editKasboekModal #modal-titel').addClass('text-danger');
+		$('#editKasboek_save').prop('disabled', true);
+		$('#editKasboek_save').hide();
+		
+	} else {
+		$('#editKasboekModal #modal-titel').html('Update kasboek!');
+		$('#editKasboekModalForm').one('submit', listener_newKasboek_submit);
+		$('#editKasboekModalForm #id').val(kasboek_gegevens.id);
+		$('#editKasboekModalForm #jaartal').val(kasboek_gegevens.jaartal);
+		$('#editKasboekModalForm #rubriek').val(kasboek_gegevens.rubriekId);
+		$('#editKasboekModalForm #omschrijving').val(kasboek_gegevens.omschrijving);
+		$('#editKasboekModalForm #datum').val(kasboek_gegevens.datum);
+		$('#editKasboekModalForm #inkomsten').val(kasboek_gegevens.inkomsten);
+		$('#editKasboekModalForm #uitgaven').val(kasboek_gegevens.uitgaven);
+	}
 	$('#editKasboekModal').one('shown.bs.modal', listener_newKasboek_focus);
 	$('#editKasboekModal').one('hidden.bs.modal', listener_newkasboek_hidden);
-	$('#editKasboekModalForm').one('submit', listener_newKasboek_submit);
-	$('#editKasboekModalForm #id').val(kasboek_gegevens.id);
-	$('#editKasboekModalForm #jaartal').val(kasboek_gegevens.jaartal);
-	$('#editKasboekModalForm #rubriek').val(kasboek_gegevens.rubriekId);
-	$('#editKasboekModalForm #omschrijving').val(kasboek_gegevens.omschrijving);
-	$('#editKasboekModalForm #datum').val(kasboek_gegevens.datum);
-	$('#editKasboekModalForm #inkomsten').val(kasboek_gegevens.inkomsten);
-	$('#editKasboekModalForm #uitgaven').val(kasboek_gegevens.uitgaven);
 	$("#editKasboekModal").modal("show");
 };
 
 function listener_updateKasboek_focus() {
-	$("input[name='voornaam']").focus();
+	$("input[name='jaartal']").focus();
 };
 
 function listener_updatekasboek_hidden() {
@@ -137,12 +148,30 @@ function deleteKasboek() {
 };
 
 function setup_deleteKasboekModal() {
-	$('#modal-titel').html('Delete kasboek!');
+	if (kasboek_gegevens == "") {
+		$('#editKasboekModal #modal-titel').html('Je hebt geen selectie gemaakt!');
+		$('#editKasboekModal #modal-titel').addClass('text-danger');
+		$('#editKasboek_save').prop('disabled', true);
+		$('#editKasboek_save').hide();
+		
+	} else {
+		$('#editKasboekModal #modal-titel').html('Delete kasboek!');
+		$('#editKasboekModalForm').one('submit', listener_deleteKasboek_submit);
+		$('#editKasboekModalForm #id').val(kasboek_gegevens.id);
+		$('#editKasboekModalForm #jaartal').val(kasboek_gegevens.jaartal);
+		$('#editKasboekModalForm #rubriek').val(kasboek_gegevens.rubriekId);
+		$('#editKasboekModalForm #omschrijving').val(kasboek_gegevens.omschrijving);
+		$('#editKasboekModalForm #datum').val(kasboek_gegevens.datum);
+		$('#editKasboekModalForm #inkomsten').val(kasboek_gegevens.inkomsten);
+		$('#editKasboekModalForm #uitgaven').val(kasboek_gegevens.uitgaven);
+	}
+	$('#editKasboekModal').one('shown.bs.modal', listener_deleteKasboek_focus);
+	$('#editKasboekModal').one('hidden.bs.modal', listener_deletekasboek_hidden);
 	$("#editKasboekModal").modal("show");
 };
 
 function listener_deleteKasboek_focus() {
-	$("input[name='voornaam']").focus();
+	$("input[name='jaartal']").focus();
 };
 
 function listener_deletekasboek_hidden() {
@@ -205,6 +234,7 @@ function kasboeklijst_geladen() {
 };
 
 async function laad_Totalen() {
+	kasboek_gegevens = "";
 	let data = await fetch_JSON('/kasboek/restcontroller/kasboekTotalen/' + selectedJaar + '/' + selectedRubriek);
 	let html = ``;
 	console.log('Totalen: ' + data.Jaar);
