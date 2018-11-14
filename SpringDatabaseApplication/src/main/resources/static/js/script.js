@@ -80,7 +80,7 @@ async function Load_JSON(url, div) {
 async function fetch_JSON(url) {
 	let response = await fetch(url);
 	let data = await response.json();
-	console.log('Data: ' + data);
+	console.log('Fetch JSON data');
 	return data;
 }
 
@@ -119,6 +119,15 @@ function getFormattedDate(datum) {
 	  
 	return day + '/' + month + '/' + year;
 };
+
+function getFormattedEuro(euro) {
+	const formatter = new Intl.NumberFormat('nl-NL', {
+		style: 'currency',
+		currency: 'EUR',
+		minimumFractionDigits: 2
+	});
+	return formatter.format(euro);
+}
 
 function FormDataToJSON(FormElement){    
     var formData = new FormData(FormElement);

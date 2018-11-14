@@ -3,6 +3,8 @@ package willydekeyser.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Kasboek {
@@ -10,6 +12,7 @@ public class Kasboek {
 	private Integer id;
     private Rubriek rubriek;
     private Integer rubriekId;
+    @NotNull(message="Jaar invullen")
     private Integer jaartal;
     private String omschrijving;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

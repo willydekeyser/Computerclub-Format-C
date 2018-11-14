@@ -99,23 +99,30 @@ public class KasboekController {
 		return "kasboek/fragmenten/kasboekmodal :: editKasboekModal";
 	}
 	
-	@PostMapping("/save_newKasboek")
-	public @ResponseBody Kasboek save_NewKasboek(@Validated Kasboek kasboek) {
-		this.kasboek = kasboekservice.addKasboek(kasboek);
-		return this.kasboek;
+	@PostMapping("/save_newKasboek/{selected_jaar}/{selected_rubriek}")
+	public @ResponseBody List<Kasboek> save_NewKasboek(@Validated Kasboek kasboek, @PathVariable Integer selected_jaar, @PathVariable Integer selected_rubriek) {
+		kasboekservice.addKasboek(kasboek);
+		kasboekLijst = kasboekservice.getAllKasboekRubriekJaarRubriek(selected_jaar, selected_rubriek); 
+		return kasboekLijst;
 	}
 	
-	@PostMapping("/save_updateKasboek")
-	public @ResponseBody Kasboek save_updateKasboek(@Validated Kasboek kasboek) {
+	@PostMapping("/save_updateKasboek/{selected_jaar}/{selected_rubriek}/{change_jaar}/{jaar_menu}")
+	public @ResponseBody List<Kasboek> save_updateKasboek(@Validated Kasboek kasboek, @PathVariable Integer selected_jaar, @PathVariable Integer selected_rubriek, 
+			@PathVariable Boolean change_jaar, @PathVariable Integer jaar_menu) {
 		kasboekservice.updateKasboek(kasboek);
-		this.kasboek = kasboekservice.getKasboekById(kasboek.getId());
-		return this.kasboek;
+		if (change_jaar) {
+			kasboekLijst = kasboekservice.getAllKasboekRubriekJaarRubriek(jaar_menu, 0);
+		} else {
+			kasboekLijst = kasboekservice.getAllKasboekRubriekJaarRubriek(selected_jaar, selected_rubriek);
+		}
+		return kasboekLijst;
 	}
 	
-	@PostMapping("/save_deleteKasboek")
-	public @ResponseBody Kasboek save_deleteKasboek(@Validated Integer id) {
-		kasboekservice.deleteKasboek(id);
-		return null;
+	@PostMapping("/save_deleteKasboek/{selected_jaar}/{selected_rubriek}")
+	public @ResponseBody List<Kasboek> save_deleteKasboek(@Validated Kasboek kasboek, @PathVariable Integer selected_jaar, @PathVariable Integer selected_rubriek) {
+		kasboekservice.deleteKasboek(kasboek.getId());
+		kasboekLijst = kasboekservice.getAllKasboekRubriekJaarRubriek(selected_jaar, selected_rubriek);
+		return kasboekLijst;
 	}
 	
 /**
@@ -141,9 +148,14 @@ public class KasboekController {
 	}
 	
 	@GetMapping("/restcontroller/kasboekbyid/{id}")
-	public @ResponseBody Kasboek restConrollerledenById(@PathVariable Integer id) {
+	public @ResponseBody Kasboek restConrollerkasboekById(@PathVariable Integer id) {
 		kasboek = kasboekservice.getKasboekById(id);
 		return kasboek;
+	}
+	
+	@GetMapping("/restcontroller/kasboekmenu")
+	public @ResponseBody List<KasboekJaartal> restConrollerkasboekmenu() {
+		return kasboekservice.getKasboekJaarRubriek();
 	}
 	
 	@GetMapping("/restcontroller/kasboek")

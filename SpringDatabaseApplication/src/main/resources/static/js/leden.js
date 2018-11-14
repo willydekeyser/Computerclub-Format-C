@@ -119,18 +119,13 @@ function leden_gegevens_laden(data) {
 };
 
 function leden_lidgeld_laden(data) {
-	const formatter = new Intl.NumberFormat('nl-NL', {
-		style: 'currency',
-		currency: 'EUR',
-		minimumFractionDigits: 2
-	});
 	let html = ``;
+	$('#lidgeld_tabel_body').empty();
 	data.forEach((lidgeld, index) => {
-		$('#lidgeld_tabel_body').empty();
 		html += `<tr class="test" onclick="lidgeldselect(${lidgeld.id})" id="${lidgeld.id}">
 			<td style="width: 50px" class="right">${lidgeld.id}</td>
 			<td class="right">${getFormattedDate(lidgeld.datum)}</td>
-			<td class="right">${formatter.format(lidgeld.bedrag)}</td>
+			<td class="right">${getFormattedEuro(lidgeld.bedrag)}</td>
 			</tr>`;
 	});
 	$('#lidgeld_tabel_body').html(html);

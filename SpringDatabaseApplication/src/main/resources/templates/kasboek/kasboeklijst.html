@@ -26,7 +26,7 @@
 		<th class="kop right">Inkomsten</th>
 	</tr>
 	</thead>
-	<tbody>
+	<tbody id="kasboek_tabel_body">
 	<tr class="test" onclick="kasboekSelect(this)" th:each="kasboek : ${kasboek}" th:id="${kasboek.id}">
 		<td style="width: 50px" class="test" th:text="${kasboekStat.count}"></td>
 		<td style="width: 50px" class="test" th:text="${kasboek.id}"></td>

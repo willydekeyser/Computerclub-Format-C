@@ -43,6 +43,11 @@ public class StartController {
 		return modelandview;	
 	}
 	
+	@GetMapping("/error")
+	public @ResponseBody String error() {
+		return "ERROR!";	
+	}
+	
 	@GetMapping(value = "/start_main")
 	public ModelAndView stat_main() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

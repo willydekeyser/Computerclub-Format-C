@@ -3,6 +3,11 @@ let selectedId = 0;
 let selectedJaar = 0;
 let selectedRubriek = 0;
 let kasboek_gegevens = "";
+let change_jaar = false;
+let change_rubriek = false;
+let jaar = 0;
+let rubriek = 0;
+
 
 async function kasboek_start() {
 	console.log('------------------------------------------------------------');
@@ -14,6 +19,14 @@ async function kasboek_start() {
 	kasboeklijst_geladen();
 	kasboeklijst();
 }
+
+/**
+ * 
+ * 
+ * New kasboek
+ * 
+ * 
+ */
 
 function newKasboek() {
 	console.log("New kasboek");
@@ -32,13 +45,18 @@ function newKasboek() {
 };
 
 function setup_newKasboekModal() {
+	change_jaar = false;
+	change_rubriek = false;
 	$('#modal-titel').html('New kasboek!');
 	$('#editKasboekModal #modal-titel').removeClass('text-danger');
 	$('#editKasboek_save').prop('disabled', false);
 	$('#editKasboek_save').show();
+	$('#editKasboek_save').text('Save kasboek');
 	$('#editKasboekModal').one('shown.bs.modal', listener_newKasboek_focus);
 	$('#editKasboekModal').one('hidden.bs.modal', listener_newkasboek_hidden);
 	$('#editKasboekModalForm').one('submit', listener_newKasboek_submit);
+	$('#editKasboekModalForm #jaartal').one('input', listener_change_jaar);
+	$('#editKasboekModalForm #rubriek').one('input', listener_change_rubriek);
 	if (selectedJaar != 0) {
 		$('#editKasboekModalForm #jaartal').val(selectedJaar);
 	};
@@ -67,17 +85,34 @@ function listener_newkasboek_hidden() {
 
 function listener_newKasboek_submit() {
 	let form = $(this);
-	let data = post_Form('/kasboek/save_newKasboek', form)
+	let data = post_Form('/kasboek/save_newKasboek/' + selectedJaar + '/' + selectedRubriek, form)
 	.then((data) => {
-		selectedId = data.id;
 		$("#editKasboekModal").modal('toggle');
-		console.log('New Kasboek: ');
+		kasboek_tabel_refrech(data)
+		console.log('New Kasboek');
 	})
 	.catch((error) => {
 		console.log('FOUT: ' + error);
 	});
 	return false;
 };
+
+
+function listener_change_jaar() {
+	change_jaar = true;
+};
+
+function listener_change_rubriek() {
+	change_rubriek = true;
+};
+
+/**
+ * 
+ * 
+ * Update kasboek
+ * 
+ * 
+ */
 
 function updateKasboek() {
 	console.log("Edit kasboek");
@@ -103,8 +138,17 @@ function setup_updateKasboekModal() {
 		$('#editKasboek_save').hide();
 		
 	} else {
+		change_jaar = false;
+		change_rubriek = false;
 		$('#editKasboekModal #modal-titel').html('Update kasboek!');
-		$('#editKasboekModalForm').one('submit', listener_newKasboek_submit);
+		$('#editKasboekModal #modal-titel').removeClass('text-danger');
+		$('#editKasboek_save').text('Save kasboek');
+		$('#editKasboek_save').prop('disabled', false);
+		$('#editKasboek_save').show();
+		$('#editKasboekModalForm').one('submit', listener_updateKasboek_submit);
+		$('#editKasboekModalForm #jaartal').one('input', listener_change_jaar);
+		$('#editKasboekModalForm #rubriek').one('input', listener_change_rubriek);
+		
 		$('#editKasboekModalForm #id').val(kasboek_gegevens.id);
 		$('#editKasboekModalForm #jaartal').val(kasboek_gegevens.jaartal);
 		$('#editKasboekModalForm #rubriek').val(kasboek_gegevens.rubriekId);
@@ -113,8 +157,8 @@ function setup_updateKasboekModal() {
 		$('#editKasboekModalForm #inkomsten').val(kasboek_gegevens.inkomsten);
 		$('#editKasboekModalForm #uitgaven').val(kasboek_gegevens.uitgaven);
 	}
-	$('#editKasboekModal').one('shown.bs.modal', listener_newKasboek_focus);
-	$('#editKasboekModal').one('hidden.bs.modal', listener_newkasboek_hidden);
+	$('#editKasboekModal').one('shown.bs.modal', listener_updateKasboek_focus);
+	$('#editKasboekModal').one('hidden.bs.modal', listener_updatekasboek_hidden);
 	$("#editKasboekModal").modal("show");
 };
 
@@ -128,8 +172,28 @@ function listener_updatekasboek_hidden() {
 };
 
 function listener_updateKasboek_submit() {
-	
+	let form = $(this);
+	jaar = $('#editKasboekModalForm #jaartal').val();
+	rubriek = $('#editKasboekModalForm #rubriek').val();
+	let data = post_Form('/kasboek/save_updateKasboek/' + selectedJaar + '/' + selectedRubriek + '/' + change_jaar + '/' + jaar, form)
+	.then((data) => {
+		$("#editKasboekModal").modal('toggle');
+		kasboek_tabel_refrech(data)
+		console.log('Update Kasboek');
+	})
+	.catch((error) => {
+		console.log('FOUT: ' + error);
+	});
+	return false;
 };
+
+/**
+ * 
+ * 
+ * Delete kasboek
+ * 
+ * 
+ */
 
 function deleteKasboek() {
 	console.log("Delete kasboek");
@@ -150,12 +214,14 @@ function deleteKasboek() {
 function setup_deleteKasboekModal() {
 	if (kasboek_gegevens == "") {
 		$('#editKasboekModal #modal-titel').html('Je hebt geen selectie gemaakt!');
-		$('#editKasboekModal #modal-titel').addClass('text-danger');
 		$('#editKasboek_save').prop('disabled', true);
 		$('#editKasboek_save').hide();
 		
 	} else {
 		$('#editKasboekModal #modal-titel').html('Delete kasboek!');
+		$('#editKasboek_save').text('Delete kasboek');
+		$('#editKasboek_save').prop('disabled', false);
+		$('#editKasboek_save').show();
 		$('#editKasboekModalForm').one('submit', listener_deleteKasboek_submit);
 		$('#editKasboekModalForm #id').val(kasboek_gegevens.id);
 		$('#editKasboekModalForm #jaartal').val(kasboek_gegevens.jaartal);
@@ -165,6 +231,7 @@ function setup_deleteKasboekModal() {
 		$('#editKasboekModalForm #inkomsten').val(kasboek_gegevens.inkomsten);
 		$('#editKasboekModalForm #uitgaven').val(kasboek_gegevens.uitgaven);
 	}
+	$('#editKasboekModal #modal-titel').addClass('text-danger');
 	$('#editKasboekModal').one('shown.bs.modal', listener_deleteKasboek_focus);
 	$('#editKasboekModal').one('hidden.bs.modal', listener_deletekasboek_hidden);
 	$("#editKasboekModal").modal("show");
@@ -179,7 +246,18 @@ function listener_deletekasboek_hidden() {
 	$('#editKasboekModalForm').trigger('reset');
 };
 
-function listener_delteKasboek_submit() {
+function listener_deleteKasboek_submit() {
+	let form = $(this);
+	let data = post_Form('/kasboek/save_deleteKasboek/' + selectedJaar + '/' + selectedRubriek, form)
+	.then((data) => {
+		$("#editKasboekModal").modal('toggle');
+		kasboek_tabel_refrech(data)
+		console.log('Delete Kasboek');
+	})
+	.catch((error) => {
+		console.log('FOUT: ' + error);
+	});
+	return false;
 	
 };
 
@@ -239,6 +317,56 @@ async function laad_Totalen() {
 	let html = ``;
 	console.log('Totalen: ' + data.Jaar);
 	$('.main_section_B').html(`<p>Jaar: ${data.Jaar} Rubriek: ${data.Rubriek}</p> 
-	Inkomsten: €${data.Totalen[0].Inkomsten} Uitgaven: €${data.Totalen[0].Uitgaven} Totaal: €${data.Totalen[0].Totaal}</br>
-	Inkomsten: €${data.Totalen[1].Inkomsten} Uitgaven: €${data.Totalen[1].Uitgaven} Totaal: €${data.Totalen[1].Totaal}`);
+	Inkomsten: ${getFormattedEuro(data.Totalen[0].Inkomsten)} Uitgaven: ${getFormattedEuro(data.Totalen[0].Uitgaven)} Totaal: ${getFormattedEuro(data.Totalen[0].Totaal)}</br>
+	Inkomsten: ${getFormattedEuro(data.Totalen[1].Inkomsten)} Uitgaven: ${getFormattedEuro(data.Totalen[1].Uitgaven)} Totaal: ${getFormattedEuro(data.Totalen[1].Totaal)}`);
+};
+
+async function kasboek_menu_refrech() {
+	let html = ``;
+	let data = await fetch_JSON('/kasboek/restcontroller/kasboekmenu');
+	html += `<div><ol class="menu_lijst" id="namenlijst_click">
+		<li class="menu_lijst_item kasboeklijst_click active" id="kasboek" jaar="0" rubriek="0">
+			<span class="menu_lijst_item_tekst">Kasboek</span>
+		</li>`;
+	data.forEach((jaren, index) => {
+		if (jaren.jaartal == jaar) {
+			html += `<li class="menu_lijst_item kasboeklijst_click active" id="${index + 1}" jaar="${jaren.jaartal}" rubriek="0">
+				<span class="menu_lijst_item_tekst">${jaren.jaartal}</span>
+			<ol class="sub_menu_lijst menuopen" id="jaartal${index + 1}" style="display: block;">`;
+		} else {
+			html += `<li class="menu_lijst_item kasboeklijst_click" id="${index + 1}" jaar="${jaren.jaartal}" rubriek="0">
+				<span class="menu_lijst_item_tekst">${jaren.jaartal}</span>
+			<ol class="sub_menu_lijst" id="jaartal${index + 1}" style="display: none;">`;
+		}
+		let rubrieken = jaren.rubriek;
+		rubrieken.forEach((rubriek, index) => {
+			html += `<li class="sub_menu_lijst_item sub_kasboeklijst_click" id="${rubriek.id}" jaar="${jaren.jaartal}" rubriek="${rubriek.id}">${rubriek.rubriek}</li>`;
+		})
+		html += `</ol></li>`;
+	});
+	html += `</ol</div>`;
+	$('.menu_main').html(html);
+	kasboeklijst();
+};
+
+function kasboek_tabel_refrech(data) {
+	let html = ``;
+	$('#kasboek_tabel_body').empty();
+	data.forEach((kasboek, index) => {
+		html += `<tr id="${kasboek.id}" class="test" onclick="kasboekSelect(this)">
+			<td class="test" style="width: 50px">${index + 1}</td>
+			<td class="test" style="width: 50px">${kasboek.id}</td>
+			<td class="test" style="width: 50px">${kasboek.jaartal}</td>
+			<td class="test" style="width: 200px">${kasboek.rubriek.rubriek}</td>
+			<td class="test">${kasboek.omschrijving}</id>
+			<td class="test" style="width: 80px">${getFormattedDate(kasboek.datum)}</td>
+			<td class="test" style="width: 80px">${getFormattedEuro(kasboek.uitgaven)}</td>
+			<td class="test" style="width: 80px">${getFormattedEuro(kasboek.inkomsten)}</td>`;
+	});
+	$('#kasboek_tabel_body').html(html);
+	laad_Totalen();
+	if (change_jaar || change_rubriek) {
+		kasboek_menu_refrech();
+	}
+	
 }
