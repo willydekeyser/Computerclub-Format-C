@@ -1,4 +1,4 @@
-let soortenLeden = {
+let SoortenLeden_gegevens = {
 		id: 0,
 		soortleden: ""
 };
@@ -9,8 +9,8 @@ async function soortenleden_tabel_start() {
 };
 
 function soortenledenSelect(row) {
-	soortenLeden.id = row.getAttribute('id');
-	soortenLeden.soortleden = row.getAttribute('soortenleden');
+	SoortenLeden_gegevens.id = row.getAttribute('id');
+	SoortenLeden_gegevens.soortleden = row.getAttribute('soortenleden');
 	$('tr.active').removeClass('active');
 	$(row).closest('tr').addClass('active');
 };
@@ -126,9 +126,9 @@ function setup_updateSoortenledenModal() {
 		$('#editSoortenledenModal #modal-titel').html('Update soort!');
 		$('#editSoortenledenModal #modal-titel').removeClass('text-danger');
 		$('#editSoortenleden_save').show();
-		$('#editSoortenledenModalForm #id').val(soortenLeden.id);
+		$('#editSoortenledenModalForm #id').val(SoortenLeden_gegevens.id);
 		$('#editSoortenledenModalForm #soortenleden').prop('readonly', false);
-		$('#editSoortenledenModalForm #soortenleden').val(soortenLeden.soortleden);
+		$('#editSoortenledenModalForm #soortenleden').val(SoortenLeden_gegevens.soortleden);
 	};
 	$('#form_body_error').hide();
 	$('#form_body').show();
@@ -191,12 +191,12 @@ async function setup_deleteSoortenledenModal() {
 		$('#editSoortenleden_save').prop('disabled', true);
 		$('#editSoortenleden_save').hide();
 	} else {
-		let exist = await existRecord('/soortenleden/existLedenBySoortenledenId/' + soortenLeden.id);
+		let exist = await existRecord('/soortenleden/existLedenBySoortenledenId/' + SoortenLeden_gegevens.id);
 		if(exist == 'true') {
 			$('#editSoortenleden_save').hide();
 			$('#form_body_error').show();
 			$('#form_body').hide();
-			$('#form_body_error_naam').html(soortenLeden.soortleden);
+			$('#form_body_error_naam').html(SoortenLeden_gegevens.soortleden);
 		}else {
 			$('#editSoortenleden_save').show();
 			$('#form_body_error').hide();
@@ -204,8 +204,8 @@ async function setup_deleteSoortenledenModal() {
 		};
 		$('#editSoortenledenModal #modal-titel').html('Delete rubriek!');
 		$('#editSoortenleden_save').text('Delete rubriek');
-		$('#editSoortenledenModalForm #id').val(soortenLeden.id);
-		$('#editSoortenledenModalForm #soortenleden').val(soortenLeden.soortleden);
+		$('#editSoortenledenModalForm #id').val(SoortenLeden_gegevens.id);
+		$('#editSoortenledenModalForm #soortenleden').val(SoortenLeden_gegevens.soortleden);
 		$('#editSoortenledenModalForm #soortenleden').prop('readonly', true);
 	};
 	$('#editSoortenledenModal #modal-titel').addClass('text-danger');

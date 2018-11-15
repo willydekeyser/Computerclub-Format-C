@@ -2,7 +2,18 @@ let kasboekId = 0;
 let selectedId = 0;
 let selectedJaar = 0;
 let selectedRubriek = 0;
-let kasboek_gegevens = "";
+let Kasboek_gegevens = {
+		id : 0,
+		jaar : 0,
+		rubriek : {
+			id : 0,
+			rubriek : ''
+		},
+		onschrijving : '',
+		datum : 0,
+		uitgaven : 0,
+		inkomsten : 0
+};
 let change_jaar = false;
 let change_rubriek = false;
 let jaar = 0;
@@ -14,7 +25,6 @@ async function kasboek_start() {
 	console.log('Menu kasboek onclick');
 	reset_grid();
 	menu_height(3);
-	
 	await Refrech_HTML('/kasboek/', '.menu_main');
 	kasboeklijst_geladen();
 	kasboeklijst();
@@ -131,7 +141,8 @@ function updateKasboek() {
 };
 
 function setup_updateKasboekModal() {
-	if (kasboek_gegevens == "") {
+	let actief_row = $('tr.active');
+	if (actief_row === undefined || actief_row.length == 0) {
 		$('#editKasboekModal #modal-titel').html('Je hebt geen selectie gemaakt!');
 		$('#editKasboekModal #modal-titel').addClass('text-danger');
 		$('#editKasboek_save').prop('disabled', true);
@@ -149,13 +160,13 @@ function setup_updateKasboekModal() {
 		$('#editKasboekModalForm #jaartal').one('input', listener_change_jaar);
 		$('#editKasboekModalForm #rubriek').one('input', listener_change_rubriek);
 		
-		$('#editKasboekModalForm #id').val(kasboek_gegevens.id);
-		$('#editKasboekModalForm #jaartal').val(kasboek_gegevens.jaartal);
-		$('#editKasboekModalForm #rubriek').val(kasboek_gegevens.rubriekId);
-		$('#editKasboekModalForm #omschrijving').val(kasboek_gegevens.omschrijving);
-		$('#editKasboekModalForm #datum').val(kasboek_gegevens.datum);
-		$('#editKasboekModalForm #inkomsten').val(kasboek_gegevens.inkomsten);
-		$('#editKasboekModalForm #uitgaven').val(kasboek_gegevens.uitgaven);
+		$('#editKasboekModalForm #id').val(Kasboek_gegevens.id);
+		$('#editKasboekModalForm #jaartal').val(Kasboek_gegevens.jaartal);
+		$('#editKasboekModalForm #rubriek').val(Kasboek_gegevens.rubriekId);
+		$('#editKasboekModalForm #omschrijving').val(Kasboek_gegevens.omschrijving);
+		$('#editKasboekModalForm #datum').val(Kasboek_gegevens.datum);
+		$('#editKasboekModalForm #inkomsten').val(Kasboek_gegevens.inkomsten);
+		$('#editKasboekModalForm #uitgaven').val(Kasboek_gegevens.uitgaven);
 	}
 	$('#editKasboekModal').one('shown.bs.modal', listener_updateKasboek_focus);
 	$('#editKasboekModal').one('hidden.bs.modal', listener_updatekasboek_hidden);
@@ -212,7 +223,8 @@ function deleteKasboek() {
 };
 
 function setup_deleteKasboekModal() {
-	if (kasboek_gegevens == "") {
+	let actief_row = $('tr.active');
+	if (actief_row === undefined || actief_row.length == 0) {
 		$('#editKasboekModal #modal-titel').html('Je hebt geen selectie gemaakt!');
 		$('#editKasboek_save').prop('disabled', true);
 		$('#editKasboek_save').hide();
@@ -223,13 +235,13 @@ function setup_deleteKasboekModal() {
 		$('#editKasboek_save').prop('disabled', false);
 		$('#editKasboek_save').show();
 		$('#editKasboekModalForm').one('submit', listener_deleteKasboek_submit);
-		$('#editKasboekModalForm #id').val(kasboek_gegevens.id);
-		$('#editKasboekModalForm #jaartal').val(kasboek_gegevens.jaartal);
-		$('#editKasboekModalForm #rubriek').val(kasboek_gegevens.rubriekId);
-		$('#editKasboekModalForm #omschrijving').val(kasboek_gegevens.omschrijving);
-		$('#editKasboekModalForm #datum').val(kasboek_gegevens.datum);
-		$('#editKasboekModalForm #inkomsten').val(kasboek_gegevens.inkomsten);
-		$('#editKasboekModalForm #uitgaven').val(kasboek_gegevens.uitgaven);
+		$('#editKasboekModalForm #id').val(Kasboek_gegevens.id);
+		$('#editKasboekModalForm #jaartal').val(Kasboek_gegevens.jaartal);
+		$('#editKasboekModalForm #rubriek').val(Kasboek_gegevens.rubriekId);
+		$('#editKasboekModalForm #omschrijving').val(Kasboek_gegevens.omschrijving);
+		$('#editKasboekModalForm #datum').val(Kasboek_gegevens.datum);
+		$('#editKasboekModalForm #inkomsten').val(Kasboek_gegevens.inkomsten);
+		$('#editKasboekModalForm #uitgaven').val(Kasboek_gegevens.uitgaven);
 	}
 	$('#editKasboekModal #modal-titel').addClass('text-danger');
 	$('#editKasboekModal').one('shown.bs.modal', listener_deleteKasboek_focus);
@@ -264,13 +276,15 @@ function listener_deleteKasboek_submit() {
 function kasboekSelect(id) {
 	kasboekId = $(id).attr('id');
 	kasboek_gegevens_refrech();
+	//Kasboek_gegevens.id = kasboekId;
+	
 	$('tr.active').removeClass('active');
 	$(id).closest('tr').addClass('active');
 };
 
 async function kasboek_gegevens_refrech() {
 	let response = await fetch('/kasboek/restcontroller/kasboekbyid/' + kasboekId);
-	kasboek_gegevens = await response.json();
+	Kasboek_gegevens = await response.json();
 };
 
 function kasboeklijst() {

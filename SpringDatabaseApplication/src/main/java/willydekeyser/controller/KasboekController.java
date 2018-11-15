@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -92,6 +93,7 @@ public class KasboekController {
         return "kasboek/kasboeklijst :: kasboektabel";
     }
     
+    @Secured("ROLE_GOLD")
 	@GetMapping(value="/editKasboek")
 	public String editKasboek(ModelMap model) {
 		rubrieken = rubriekservice.getAllRubriek();
@@ -99,6 +101,7 @@ public class KasboekController {
 		return "kasboek/fragmenten/kasboekmodal :: editKasboekModal";
 	}
 	
+	@Secured("ROLE_GOLD")
 	@PostMapping("/save_newKasboek/{selected_jaar}/{selected_rubriek}")
 	public @ResponseBody List<Kasboek> save_NewKasboek(@Validated Kasboek kasboek, @PathVariable Integer selected_jaar, @PathVariable Integer selected_rubriek) {
 		kasboekservice.addKasboek(kasboek);
@@ -106,6 +109,7 @@ public class KasboekController {
 		return kasboekLijst;
 	}
 	
+	@Secured("ROLE_GOLD")
 	@PostMapping("/save_updateKasboek/{selected_jaar}/{selected_rubriek}/{change_jaar}/{jaar_menu}")
 	public @ResponseBody List<Kasboek> save_updateKasboek(@Validated Kasboek kasboek, @PathVariable Integer selected_jaar, @PathVariable Integer selected_rubriek, 
 			@PathVariable Boolean change_jaar, @PathVariable Integer jaar_menu) {
@@ -118,6 +122,7 @@ public class KasboekController {
 		return kasboekLijst;
 	}
 	
+	@Secured("ROLE_GOLD")
 	@PostMapping("/save_deleteKasboek/{selected_jaar}/{selected_rubriek}")
 	public @ResponseBody List<Kasboek> save_deleteKasboek(@Validated Kasboek kasboek, @PathVariable Integer selected_jaar, @PathVariable Integer selected_rubriek) {
 		kasboekservice.deleteKasboek(kasboek.getId());

@@ -1,6 +1,6 @@
-let rubriek = {
-		id: 0,
-		rubriek: ''
+var Rubriek_gegevens = {
+		id : 0,
+		rubriek : ''
 };
 
 async function rubriek_tabel_start() {
@@ -9,8 +9,8 @@ async function rubriek_tabel_start() {
 };
 
 function rubriekSelect(row) {
-	rubriek.id = row.getAttribute('id');
-	rubriek.rubriek = row.getAttribute('rubriek');
+	Rubriek_gegevens.id = row.getAttribute('id');
+	Rubriek_gegevens.rubriek = row.getAttribute('rubriek');
 	console.log("rubriekSelect: " + rubriek.id);
 	$('tr.active').removeClass('active');
 	$(row).closest('tr').addClass('active');
@@ -116,7 +116,7 @@ function updateRubriek() {
 };
 
 function setup_updateRubriekModal() {
-	var actief_row = $('tr.active');
+	let actief_row = $('tr.active');
 	if (actief_row === undefined || actief_row.length == 0) {
 		$('#editRubriekModal #modal-titel').html('Je hebt geen selectie gemaakt!');
 		$('#editRubriekModal #modal-titel').addClass('text-danger');
@@ -126,9 +126,9 @@ function setup_updateRubriekModal() {
 		$('#editRubriekModal #modal-titel').html('Update rubriek!');
 		$('#editRubriekModal #modal-titel').removeClass('text-danger');
 		$('#editRubriek_save').show();
-		$('#editRubriekModalForm #id').val(rubriek.id);
+		$('#editRubriekModalForm #id').val(Rubriek_gegevens.id);
 		$('#editRubriekModalForm #rubriek').prop('readonly', false);
-		$('#editRubriekModalForm #rubriek').val(rubriek.rubriek);
+		$('#editRubriekModalForm #rubriek').val(Rubriek_gegevens.rubriek);
 	};
 	$('#form_body_error').hide();
 	$('#form_body').show();
@@ -191,12 +191,12 @@ async function setup_deleteRubriekModal() {
 		$('#editRubriek_save').prop('disabled', true);
 		$('#editRubriek_save').hide();
 	} else {
-		let exist = await existRecord('/rubriek/existKasboekByRubriekId/' + rubriek.id);
+		let exist = await existRecord('/rubriek/existKasboekByRubriekId/' + Rubriek_gegevens.id);
 		if(exist == 'true') {
 			$('#editRubriek_save').hide();
 			$('#form_body_error').show();
 			$('#form_body').hide();
-			$('#form_body_error_naam').html(rubriek.rubriek);
+			$('#form_body_error_naam').html(Rubriek_gegevens.rubriek);
 		}else {
 			$('#editRubriek_save').show();
 			$('#form_body_error').hide();
@@ -204,8 +204,8 @@ async function setup_deleteRubriekModal() {
 		};
 		$('#editRubriekModal #modal-titel').html('Delete rubriek!');
 		$('#editRubriek_save').text('Delete rubriek');
-		$('#editRubriekModalForm #id').val(rubriek.id);
-		$('#editRubriekModalForm #rubriek').val(rubriek.rubriek);
+		$('#editRubriekModalForm #id').val(Rubriek_gegevens.id);
+		$('#editRubriekModalForm #rubriek').val(Rubriek_gegevens.rubriek);
 		$('#editRubriekModalForm #rubriek').prop('readonly', true);
 	};
 	$('#editRubriekModal #modal-titel').addClass('text-danger');
