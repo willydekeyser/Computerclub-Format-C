@@ -408,6 +408,18 @@ body{
 	border-bottom-color: green
 }
 
+/* ---------------- START TABEL ---------------- */
+
+.tabel_col_2 {
+	max-width: 16vw;
+}
+
+
+
+/* ---------------- END TABEL ------------------ */
+
+
+
 
 h1 {color: green}
 p {color: #000000}
