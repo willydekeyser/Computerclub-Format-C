@@ -152,6 +152,11 @@ public class KasboekController {
 		return totalen;
 	}
 	
+	@GetMapping("/restcontroller/kasboekRefrechTabel/{jaar}/{rubriekId}")
+	public @ResponseBody List<Kasboek> restConrollerKasboekRefrechTabel(@PathVariable Integer selected_jaar, @PathVariable Integer selected_rubriek) {
+		return kasboekservice.getAllKasboekRubriekJaarRubriek(selected_jaar, selected_rubriek);
+	}
+	
 	@GetMapping("/restcontroller/kasboekbyid/{id}")
 	public @ResponseBody Kasboek restConrollerkasboekById(@PathVariable Integer id) {
 		kasboek = kasboekservice.getKasboekById(id);

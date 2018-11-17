@@ -366,6 +366,8 @@ async function kasboek_menu_refrech() {
 function kasboek_tabel_refrech(data) {
 	let html = ``;
 	$('#kasboek_tabel_body').empty();
+	kasboek_data = data;
+	
 	data.forEach((kasboek, index) => {
 		html += `<tr id="${kasboek.id}" class="test" onclick="kasboekSelect(this)">
 			<td class="test" style="width: 50px">${index + 1}</td>

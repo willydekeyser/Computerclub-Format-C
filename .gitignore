@@ -25,3 +25,4 @@ hs_err_pid*
 #Add application.properties
 application.properties
 *.properties
+/SpringDatabaseApplication/
