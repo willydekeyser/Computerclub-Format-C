@@ -1,6 +1,7 @@
 /**
- * Fetch functions
+ * Fetch functions.
  */
+/**
 
 function reset_grid() {
 	section_height(85);
