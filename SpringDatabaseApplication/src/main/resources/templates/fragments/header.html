@@ -16,10 +16,15 @@
 	<script type="text/javascript" th:src="@{/js/start.js}"></script>
 	<script type="text/javascript" th:src="@{/js/script.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/leden.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_ADIMN'')')}" type="text/javascript" th:src="@{/js/leden_aanpassen.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/lidgeld.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="text/javascript" th:src="@{/js/lidgeld_aanpassen.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/kasboek.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="text/javascript" th:src="@{/js/kasboek_aanpassen.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/rubriek.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="text/javascript" th:src="@{/js/rubriek_aanpassen.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/soortenLeden.js}"></script>
+    <script th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" type="text/javascript" th:src="@{/js/soortenLeden_aanpassen.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/agenda.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_GOLD'')')}" type="text/javascript" th:src="@{/js/restcontroller.js}"></script>
     <script th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" type="text/javascript" th:src="@{/js/contextmenu.js}"></script>
