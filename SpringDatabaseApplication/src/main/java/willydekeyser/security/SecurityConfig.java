@@ -2,6 +2,7 @@ package willydekeyser.security;
 
 
 import static willydekeyser.controller.NamenLijst.ROLE_ADMIN;
+import static willydekeyser.controller.NamenLijst.ROLE_GOLD;
 import static willydekeyser.controller.NamenLijst.ROLE_USER;
 
 import javax.sql.DataSource;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 public class SecurityConfig {
@@ -26,6 +28,11 @@ public class SecurityConfig {
 	@Order(1)
 	public static class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
+		@Bean
+	    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+	        return new MyAuthenticationSuccessHandler();
+	    }
+		
 		@Override
 		protected void configure(HttpSecurity httpSecurity) throws Exception {
 			httpSecurity.csrf().disable();
@@ -37,6 +44,7 @@ public class SecurityConfig {
 				.antMatchers("/rubriek/**").hasRole(ROLE_USER)
 				.antMatchers("/soortenleden/**").hasRole(ROLE_USER)
 				.antMatchers("/restcontroller/**").hasRole(ROLE_ADMIN)
+				.antMatchers("/actuator/**").hasRole(ROLE_GOLD)
 				.and()
 				.formLogin().loginPage("/login").permitAll()
 				.and()

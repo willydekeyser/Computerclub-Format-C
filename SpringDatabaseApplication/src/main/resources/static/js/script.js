@@ -1,7 +1,7 @@
-/**
- * Fetch functions.
- */
-/**
+/*
+ *  functions.
+ *
+*/
 
 function reset_grid() {
 	section_height(85);
@@ -20,6 +20,11 @@ function menu_height(height) {
 	document.getElementsByClassName('menu_header')[0].style.flexBasis = height + 'rem';
 	document.getElementsByClassName('menu_main')[0].style.flexBasis = 100 - height + 'rem';
 }
+
+/*
+ * Fetch functions.
+ *
+*/
 
 async function Refrech_HTML(url, div) {
 	console.log('Refrech HTML: ' + url);

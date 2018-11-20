@@ -30,18 +30,11 @@ async function kasboek_start() {
 	kasboek_menu_listener();
 }
 
-function kasboekSelect(id) {
+async function kasboekSelect(id) {
 	kasboekId = $(id).attr('id');
-	kasboek_gegevens_refrech();
-	//Kasboek_gegevens.id = kasboekId;
-	
 	$('tr.active').removeClass('active');
 	$(id).closest('tr').addClass('active');
-};
-
-async function kasboek_gegevens_refrech() {
-	let response = await fetch('/kasboek/restcontroller/kasboekbyid/' + kasboekId);
-	Kasboek_gegevens = await response.json();
+	Kasboek_gegevens = await fetch_JSON('/kasboek/restcontroller/kasboekbyid/' + kasboekId);
 };
 
 function kasboek_menu_listener() {
@@ -58,7 +51,7 @@ function kasboek_menu_listener() {
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
 		Refrech_HTML('/kasboek/kasboekJaarRubriek/' + selectedJaar + '/' + selectedRubriek, '.main_section_A');
-		laad_Totalen();
+		kasboek_totalen_laden();
 		return false;
 	});
 	
@@ -68,21 +61,21 @@ function kasboek_menu_listener() {
 		selectedJaar = $(this).attr("jaar");
 		selectedRubriek = $(this).attr("rubriek");
 		Refrech_HTML('/kasboek/kasboekJaarRubriek/' + selectedJaar + '/' + selectedRubriek, '.main_section_A');
-		laad_Totalen();
+		kasboek_totalen_laden();
 		return false;
 	});
 };
 
 function kasboek_main_laden() {
+	console.log('Start main laden');
 	$('#namenlijst_click #kasboek').addClass('active');
 	Refrech_HTML('/kasboek/kasboekJaarRubriek/0/0', '.main_section_A')
-	laad_Totalen();
-	$(document).contextmenu(function(event){
-		event.preventDefault();
-	});
+	console.log('End main laden');
+	kasboek_totalen_laden();
 };
 
-async function laad_Totalen() {
+async function kasboek_totalen_laden() {
+	console.log('Start totalen laden');
 	kasboek_gegevens = "";
 	let data = await fetch_JSON('/kasboek/restcontroller/kasboekTotalen/' + selectedJaar + '/' + selectedRubriek);
 	let html = ``;
@@ -90,6 +83,7 @@ async function laad_Totalen() {
 	$('.main_section_B').html(`<p>Jaar: ${data.Jaar} Rubriek: ${data.Rubriek}</p> 
 	Inkomsten: ${getFormattedEuro(data.Totalen[0].Inkomsten)} Uitgaven: ${getFormattedEuro(data.Totalen[0].Uitgaven)} Totaal: ${getFormattedEuro(data.Totalen[0].Totaal)}</br>
 	Inkomsten: ${getFormattedEuro(data.Totalen[1].Inkomsten)} Uitgaven: ${getFormattedEuro(data.Totalen[1].Uitgaven)} Totaal: ${getFormattedEuro(data.Totalen[1].Totaal)}`);
+	console.log('End totalen laden');
 };
 
 async function kasboek_menu_refrech() {
@@ -137,7 +131,7 @@ function kasboek_tabel_refrech(data) {
 			<td class="test" style="width: 80px">${getFormattedEuro(kasboek.inkomsten)}</td>`;
 	});
 	$('#kasboek_tabel_body').html(html);
-	laad_Totalen();
+	kasboek_totalen_laden();
 	if (change_jaar || change_rubriek) {
 		kasboek_menu_refrech();
 	}
