@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebFilter;
  * Servlet Filter implementation class TestFilter
  */
 //@Component
-@WebFilter("/leden/*")
+//@WebFilter("/leden/*")
 //@Order(2)
 public class TestFilter_1 implements Filter {
 

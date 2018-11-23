@@ -50,25 +50,14 @@ public class KasboekController {
 	@GetMapping("/")
 	public String index(Model model) {	
 		List<KasboekJaartal> jaartal = kasboekservice.getKasboekJaarRubriek();
-		model.addAttribute(PAGINA_TITEL, COMPUTERCLUB);
-		model.addAttribute(UITGAVEN, kasboekservice.getSom(0, 0)[0]);
-		model.addAttribute(INKOMSTEN, kasboekservice.getSom(0, 0)[1]);
-		model.addAttribute(TOTAAL, kasboekservice.getSom(0, 0)[2]);
 		model.addAttribute(JAARTAL, jaartal);
-		model.addAttribute(KASBOEK, kasboekLijst);
-		model.addAttribute(AANTAL, kasboekLijst.size());
 		return "kasboek/kasboek_menu :: kasboek_start";
 	}
 	
 	@GetMapping("/kasboek")
 	public String kasboek(Model model) {	
 		kasboekLijst = kasboekservice.getAllKasboekRubriek();
-		model.addAttribute(PAGINA_TITEL, COMPUTERCLUB);
-		model.addAttribute(UITGAVEN, kasboekservice.getSom(0, 0)[0]);
-		model.addAttribute(INKOMSTEN, kasboekservice.getSom(0, 0)[1]);
-		model.addAttribute(TOTAAL, kasboekservice.getSom(0, 0)[2]);
 		model.addAttribute(KASBOEK, kasboekLijst);
-		model.addAttribute(AANTAL, kasboekLijst.size());
 		return "kasboek/kasboek";
 	}
 	
@@ -83,12 +72,6 @@ public class KasboekController {
     @GetMapping("/kasboekJaarRubriek/{jaar}/{rubriek}")
     public String kasboekJaarRubriek(@PathVariable Integer jaar, @PathVariable Integer rubriek, Model model) {
     	kasboekLijst = kasboekservice.getAllKasboekRubriekJaarRubriek(jaar, rubriek);
-    	model.addAttribute(PAGINA_TITEL, COMPUTERCLUB);
-    	model.addAttribute(UITGAVEN, kasboekservice.getSom(0, 0)[0]);
-		model.addAttribute(INKOMSTEN, kasboekservice.getSom(0, 0)[1]);
-		model.addAttribute(TOTAAL, kasboekservice.getSom(0, 0)[2]);
-    	model.addAttribute(JAAR, jaar);
-    	model.addAttribute(RUBRIEK, rubriek);
     	model.addAttribute(KASBOEK, kasboekLijst);
         return "kasboek/kasboeklijst :: kasboektabel";
     }

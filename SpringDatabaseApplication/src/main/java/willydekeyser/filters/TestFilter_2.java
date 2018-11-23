@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 /**
  * Servlet Filter implementation class TestFilter_2
  */
-@Component
+//@Component
 //@WebFilter("/leden/*")
 //@Order(1)
 public class TestFilter_2 implements Filter {

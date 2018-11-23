@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Kasboek {
 
 	private Integer id;
