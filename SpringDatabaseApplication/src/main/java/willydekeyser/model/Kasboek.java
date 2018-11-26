@@ -1,16 +1,18 @@
 package willydekeyser.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
-
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
-@Component
-public class Kasboek {
+public class Kasboek implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
     private Rubriek rubriek;
     private Integer rubriekId;

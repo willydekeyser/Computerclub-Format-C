@@ -68,22 +68,19 @@ async function leden_gegevens_new() {
 
 async function leden_namenlijst_refrech() {
 	console.log('Leden namenlijst refrech: ' + selectedSoortId);
-	let response = await fetch('/leden/restcontroller/ledennamenlijstbyid/' + selectedSoortId);
-	let data = await response.json();
+	let data = await fetch_JSON('/leden/restcontroller/ledennamenlijstbyid/' + selectedSoortId);
 	leden_namenlijst_laden(data);
 };
 
 async function leden_gegevens_refrech() {
-	let response = await fetch('/leden/restcontroller/ledenbyid/' + selectedLidId);
-	leden_gegevens = await response.json();
+	leden_gegevens = await fetch_JSON('/leden/restcontroller/ledenbyid/' + selectedLidId);
 	await leden_gegevens_laden(leden_gegevens);
 	await leden_lidgeld_laden(leden_gegevens.lidgelden);
 };
 
 async function leden_lidgeld_refrech() {
 	console.log('Lidgeld refrech: ');
-	let response = await fetch('/lidgeld/restcontroller/lidgeld/' + selectedLidId);
-	let data = await response.json();
+	let data = await fetch_JSON('/lidgeld/restcontroller/lidgeld/' + selectedLidId);
 	leden_gegevens.lidgelden = data;
 	leden_lidgeld_laden(data);
 };

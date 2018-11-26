@@ -1,15 +1,9 @@
 package willydekeyser.controller;
 
-import static willydekeyser.controller.NamenLijst.AANTAL;
-import static willydekeyser.controller.NamenLijst.COMPUTERCLUB;
-import static willydekeyser.controller.NamenLijst.INKOMSTEN;
-import static willydekeyser.controller.NamenLijst.JAAR;
 import static willydekeyser.controller.NamenLijst.JAARTAL;
 import static willydekeyser.controller.NamenLijst.KASBOEK;
 import static willydekeyser.controller.NamenLijst.PAGINA_TITEL;
 import static willydekeyser.controller.NamenLijst.RUBRIEK;
-import static willydekeyser.controller.NamenLijst.TOTAAL;
-import static willydekeyser.controller.NamenLijst.UITGAVEN;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

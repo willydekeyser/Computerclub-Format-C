@@ -23,11 +23,11 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 		Collection <? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		authorities.forEach(authority -> {
 			System.out.println("MyAuthenticationSuccessHandler " + authority.getAuthority());
-			try {
-				redirectStrategy.sendRedirect(request, response, "/testen");
-			} catch (IOException e) {
-				System.out.println("ERROR: " + e.getMessage());;
-			}
+			//try {
+				//redirectStrategy.sendRedirect(request, response, "/testen");
+			//} catch (IOException e) {
+			//	System.out.println("ERROR: " + e.getMessage());;
+			//}
 	});
 	}
 }

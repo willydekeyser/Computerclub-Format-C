@@ -85,6 +85,11 @@ async function Load_JSON(url, div) {
 
 async function fetch_JSON(url) {
 	let response = await fetch(url);
+	if (!response.ok || !response.status == 200 || response.redirected) {
+		console.log('error: ' + response.status + ' - ' + 'Redirected: ' + response.redirected);
+		window.open('/', '_self');
+		throw Error(response.status);
+	};
 	let data = await response.json();
 	console.log('Fetch JSON data');
 	return data;
